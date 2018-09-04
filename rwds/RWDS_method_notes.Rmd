@@ -1,0 +1,85 @@
+---
+title: "RWDS_Methods_Interview"
+author: "Nathaniel"
+date: "11/10/2017"
+output: html_document
+---
+
+
+### Example 1)
+
+In a clinical trial for an immunotherapy to treat Colorectal Cancer we see that in a subgroup of 10 patients that were also given a molecule that inhibits angiogenesis, the patients all survived for 3 years, while in those with just the immunotherapy (212 patients) 50% had died by 3 years. A hypothesis is suggested that blocking blood supply may weaken the tumour cell making the immunotherapy more effective. As a first step, we’d like to leverage the data we have. In-house we have a RWD database from a tertiary care centre for oncology in the US, which contains medical records for 2,000 patients. 5% of the total database have immunotherapy and angiogenesis inhibitor therapy while 10% have Colorectal cancer. Within Colorectal Cancer 10% have immunotherapy and angiogenesis inhibitor.
+
+### Notes
+
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5}
+par(mar = c(1, 1, 1, 1))
+
+plot(1, xlim = c(0, 1), ylim = c(0, 1), type = "n", bty = "n", xlab = "", ylab = "", xaxt = "n", yaxt = "n")
+
+mtext("Database\nN = 2,000", side = 3)
+points(.5, .5, cex = 45)
+
+points(.4, .5, cex = 20, col = "red", lwd = 3)
+text(.4, .25, labels = "C Cancer")
+
+text(.3, .5, labels = "180")
+
+points(.6, .5, cex = 12, col = "blue", lwd = 3)
+text(.65, .7, labels = "Immun + Angio")
+
+text(.63, .5, labels = "80")
+
+text(.55, .5, labels = "20")
+
+points(.4, .7, cex = 10, col = "gray", lty = 3)
+text(.5, .84, labels = "Immun Only (?)", col = "gray")
+
+```
+
+1. How can the clinician/researcher's hypothesis be reframed into a quantifiable hypothesis?
+
+Let's imagine two groups
+
+- A: Colorectal cancer & Immunotherapy & Yes angiogenisis inhibitor
+- B: Colorectal cancer & Immunotherapy & No angiogenisis inhibitor
+
+Our hypothesis is: `p(Die in 3 years | Group A) > p(Die in 3 years | Group B)`
+
++ The mechanism behind the effect is that the angiogenisis blocks blood supply to the tumor.
+
+2. How could bias and confounding potentially skew an analysis on that hypothesis?
+
+- The RWD database does not appear to have the group  `Colorectal cancer & Immunotherapy & No angiogenisis inhibitor`. If so, it will be difficult (impossible?) to use this data to test the hypothesis. 
+
+3. When presenting the results, are there limits on the inference?
+
+- Yes, even if the appropriate groups were present in the RWD database, there is no random assignment of people to groups. Therefore, any difference in the groups could be attributed to factors other than `angiogenisis inhibitor`. That is, differences in death rates may have nothing to do with the angiogenisis inhibitor, or even Cancer.
+
+- Are the patient populations in the RWD dataset different from those in the clinical trial? What patient population do we want to make inferences to? Can we be sure that the effect of the angiogenisis inhibitor is invariant across varying demographic variables (e.g.; sex, ethnicity, overall levels of health).
+
+- What other primary measures might be of interest? Is death rate within 3 years all that matters? What about quality of life?
+
+- Even if an effect of angiogenisis inhibitor is found, it's unclear if the proposed mechanism (blood supply to the tumor) is accurate. What other mechanisms are reasonable?
+
+
+### Example 2)
+
+Roche/Genentech is developing a therapy for a rare disease. The literature on how this disease is best treated is sparse and national guidelines conflict. **The only robust registry tracking patients contains 20 patients from Wales. We want to know how this disease is currently treated, and which treatment is the current best treatment that we should compare our molecule against.** <font color = "red">This disease is chronic, and most care occurs in the general practice. Confirmatory diagnosis and care for severe cases can take place in secondary or tertiary care though.</font> Two RWD databases stand out as being large enough to capture at least 1,000 patients with the condition. One is a primary care database from the UK (family doctors), where this disease has it’s own disease code. The other database is a US insurance claims database which captures information in primary care through to secondary and tertiary, but in this database our disease shares a disease code with two other diseases. Our disease of interest leads to very different complications and comorbidities compared to the other two diseases.
+
+1. How can the clinician/researcher's hypothesis be reframed into a quantifiable hypothesis?
+
+- Q: How is disease X treated and which treatment is the current best?
+
+2. How could bias and confounding potentially skew an analysis on that hypothesis?
+
+- We can trust that the UK database is specific to disease X, however, it is only relevant to primary care. Thus, whatever treatments are used in primary care may only be relevant to early stages of the disease or for mild cases. At more advanced /severe stages, other treatments may be used.
+
+- The US database covers primary, secondary and tertiary care, so it can be used to understand how the disease is treated at all stages of the disease. However, because the disease code is shared with other diseases with different complications and comorbidities, it is impossible to know if the treatments the patients are getting is specific to disease X
+
+3. When presenting the results, are there limits on the inference?
+
+- Yes very many :)
+
+- Q: What two other diseases share the disease code with disease X in the US database? Are they sufficiently different that one could reasonably distinguish between patients with disease X and others from the data?

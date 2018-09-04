@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FFTrees</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Yihui Xie" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+    <script src="libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+    <script src="libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+    <link rel="stylesheet" href="xaringan.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+class: title-slide-custom
+
+.pull-left65[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+## Create powerful, transparent decision aids with FFTrees
+
+&lt;br&gt;
+
+&lt;font size = 6&gt; Dr. Nathaniel D. Phillips&lt;br&gt;&lt;br3&gt;&lt;a href="http://phcanalytics.roche.com/"&gt;PD PHC Data Science&lt;/a&gt;&lt;/font&gt;
+&lt;br&gt;&lt;br3&gt;
+
+&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://go.roche.com/BDE_FFTrees'&gt;https://go.roche.com/BDE_FFTrees&lt;/a&gt;&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Roche, Basel Data Enthusiasts and Skeptics, 9 July, 2018&lt;/font&gt;
+
+&lt;br&gt;
+]
+
+.pull-right35[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heartfft.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+# How can one make good decisions based on complex, noisy, limited information given limited resources?
+
+---
+
+&lt;img src="images/three_ex_1.png" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/three_ex_2.png" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/three_ex_3.png" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/three_ex_4.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="images/cook_er_full.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+.pull-left5[
+
+&lt;img src="images/cook_er_half.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;
+
+&gt; &lt;font size = 5&gt;"As the city’s principal public hospital, Cook County was the place of last resort for the hundreds of thousands of Chicagoans without health insurance. Resources were stretched to the limit. The hospital’s cavernous wards were built for another century. There were no private rooms, and patients were separated by flimsy plywood dividers. [\...] Doctors once trained a homeless man to do routine lab tests because there was no one else available.”&lt;/font&gt;
+&gt; &lt;br&gt;&lt;br&gt;
+&gt; &lt;font size = 5&gt; ~ Malcolm Gladwell, Blink&lt;/font&gt;
+
+
+]
+
+---
+
+&lt;img src="images/er_decision_1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_2.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_3.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_4.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_5.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_x.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/er_decision_7.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+.pull-left45[
+
+&lt;br&gt;
+
+### How do doctors make decisions?
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Personal judgment from clinical experience&lt;/font&gt;
+
+&lt;br&gt;
+
+### Why so many errors?
+
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Lack of timely, accurate feedback&lt;/font&gt;
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Completely exhausted, overwhelmed&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Idiosyncratic, inconsistent decision rules.&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Defensive decision making&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Extreme overconfidence&lt;/font&gt;
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/mri_diagnosis.jpg" alt="&amp;lt;font size = 3&amp;gt;Source: www.theconversation.com/&amp;lt;/font&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;font size = 3&gt;Source: www.theconversation.com/&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+---
+
+.pull-left45[
+
+&lt;br&gt;
+
+### How do doctors make decisions?
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Personal judgment from clinical experience&lt;/font&gt;
+
+&lt;br&gt;
+
+### Why so many errors?
+
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Lack of timely, accurate feedback&lt;/font&gt;
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Completely exhausted, overwhelmed&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Idiosyncratic, inconsistent decision rules.&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Defensive decision making&lt;/font&gt;
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;- Extreme overconfidence&lt;/font&gt;
+]
+
+.pull-right45[
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/overconfidence_curve.gif" alt="&amp;lt;font size = 3&amp;gt;Source: Christensen-Szalanski and James Bushyhead (1981)&amp;lt;/font&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;font size = 3&gt;Source: Christensen-Szalanski and James Bushyhead (1981)&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+---
+
+.pull-left5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### Early attempt: HDPI
+
+Heart Disease Predictive Instrument (HDPI), a logistic regression solution.
+
+Follows the classical model of rational decision making.
+
+Problem: Doctors don't use it.
+
+Why: Don't understand or trust the tool, high confidence in individual decisions, and lack of time
+
+]
+
+
+.pull-right5[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/HDPI.png" alt="&amp;lt;font size = 3&amp;gt;Source: Pozen et al. (1984)&amp;lt;/font&amp;gt;" width="90%" /&gt;
+&lt;p class="caption"&gt;&lt;font size = 3&gt;Source: Pozen et al. (1984)&lt;/font&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+
+---
+
+.pull-left5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+##Solution
+
+&lt;font size = 5&gt;A &lt;font color = "blue"&gt;Fast-and-Frugal decision tree (FFT)&lt;/font&gt; developed by Green &amp; Mehr (1997)&lt;font&gt;
+&lt;br&gt;
+
+## Result
+&lt;font size = 5&gt;Far fewer false-alarms than doctors (same accuracy as HDPI)&lt;font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;Unlike the HDPI, was understood and &lt;font color = "blue"&gt;actually used&lt;/font&gt; by physicians&lt;font&gt;
+&lt;br4&gt;
+
+]
+
+
+.pull-right5[
+
+
+&lt;img src="images/greenmehr_fft.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+&lt;font size = 3&gt;Source: Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coronary care unit?&lt;/font&gt;
+
+]
+
+
+---
+
+.pull-left4[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## What is an FFT?
+&lt;br2&gt;
+&lt;font size=5&gt;A &lt;font color = "blue"&gt;Fast-and-Frugal Tree&lt;/font&gt; (FFT) is a highly restricted decision tree.&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size=5&gt;Each node in the tree must have exactly 2 branches, where 1 branch is an exit branch leading to a decision leaf.&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size=5&gt;The final node must have 2 exit branches.&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;font size = 3&gt;*Martignon et al. (2003). Naive and yet enlightened: From natural frequencies to fast and frugal decision trees*&lt;/font&gt;
+
+]
+
+
+.pull-right6[
+
+&lt;br&gt;
+&lt;img src="images/fft_definition_examples.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+.pull-left35[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## Decision Trees
+
+A Decision Tree (DT) partitions the complete joint feature space into mutually exclusive decision regions
+
+FFTs are a restricted type of Decision Tree
+
+FFTs make the strict requirement that a decision region is made with every new, sequential partition.
+
+]
+
+.pull-right65[
+&lt;br&gt;
+&lt;img src="images/dt_v_fft_partition.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left35[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## Benefits of FFTs
+&lt;br2&gt;
+&lt;font size = 5&gt;1. Transparent&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size = 5&gt;2. Focus on what is important (and ignore what is not)&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;3. Fast and efficient&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;4. Difficult to over-fit&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;5. Easy to learn and communicate&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;6. Easy to diagnose errors&lt;/font&gt;
+&lt;br4&gt;
+
+]
+
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="images/algorithm_comparison.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+.pull-left5[
+
+&lt;img src="images/fft_examples_images.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right5[
+
+&lt;img src="images/blank_fft_B.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+.pull-left5[
+
+&lt;img src="images/fft_examples_images_depression_focus.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right5[
+
+### Depression FFT
+
+&lt;img src="images/depression_fft.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+&lt;font size = 3&gt;Jenny et al. (2013). Simple rules for detecting depression.&lt;/font&gt;
+
+
+]
+
+
+
+---
+
+.pull-left5[
+
+&lt;img src="images/fft_examples_images_military_focus.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right5[
+
+### Miltary Checkpoint FFT
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="images/terrorism_fft.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+&lt;font size = 3&gt;Keller &amp; Katsikopoulos. (2016). On the role of psychological heuristics in operational research.&lt;/font&gt;
+
+
+]
+
+
+
+
+---
+
+.pull-left4[
+
+### Impeachment FFT
+
+&lt;img src="images/newyorker_fft.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+
+&gt; "How Trump Could Get Fired", New Yorker, May 2017
+
+
+]
+
+.pull-right55[
+
+&lt;img src="images/newyorker_fft_graph.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+
+.pull-left35[
+
+### Lifecycle Management FFT
+
+
+*From http://lifecycle.roche.com/#/deliverable/pts* &lt;br&gt;&lt;br&gt;
+
+The Probability of Technical Success (PTS) is the probability of successfully transitioning to the next phase of development. It defines the development risks to deliver the Target Product Profile (TPP).
+
+PTS helps decision makers assess the value of project opportunities in the context of the entire product portfolio.
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/Probability of Technical Success.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+
+.pull-left5[
+&lt;br&gt;&lt;br&gt;
+### Problem
+&lt;br3&gt;
+&lt;font size = 5&gt;No off-the-shelf method to create fast-and-frugal trees&lt;/font&gt;
+
+### Goal
+&lt;br3&gt;
+&lt;font size = 5&gt;Create a &lt;font color = "blue"&gt;simple tool&lt;/font&gt; that allows anyone to create and &lt;font color = "blue"&gt;customize&lt;/font&gt; FFTs with minimal programming&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size = 5&gt;Visualize tree decisions using &lt;font color = "blue"&gt;icon arrays&lt;/font&gt;&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size = 5&gt;Emphasize &lt;font color = "blue"&gt;training versus prediction&lt;/font&gt;&lt;/font&gt;
+&lt;br4&gt;
+&lt;font size = 5&gt;&lt;font color = "blue"&gt;Easily compare&lt;/font&gt; FFTs to other algorithms.&lt;/font&gt;
+
+## Result: FFTrees
+
+]
+
+.pull-right5[
+
+&lt;img src="images/rlogo_and_shinyfftrees.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+## Ex) Heart Disease
+
+&lt;br3&gt;
+
+&lt;font size = 5&gt;&lt;b&gt;Data&lt;/b&gt; 150 Training cases, 153 test cases&lt;/font&gt;
+
+&lt;br&gt;
+
+| age| sex|cp | trestbps| chol| fbs|restecg     | thalach| exang| oldpeak|slope | ca|thal   | diagnosis|
+|---:|---:|:--|--------:|----:|---:|:-----------|-------:|-----:|-------:|:-----|--:|:------|---------:|
+|  63|   1|ta |      145|  233|   1|hypertrophy |     150|     0|     2.3|down  |  0|fd     |         0|
+|  67|   1|a  |      160|  286|   0|hypertrophy |     108|     1|     1.5|flat  |  3|normal |         1|
+|  67|   1|a  |      120|  229|   0|hypertrophy |     129|     1|     2.6|flat  |  2|rd     |         1|
+|  37|   1|np |      130|  250|   0|normal      |     187|     0|     3.5|down  |  0|normal |         0|
+|  41|   0|aa |      130|  204|   0|hypertrophy |     172|     0|     1.4|up    |  0|normal |         0|
+|  56|   1|aa |      120|  236|   0|normal      |     178|     0|     0.8|up    |  0|normal |         0|
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;&lt;b&gt;Goal&lt;/b&gt; Predict binary criterion (diagnosis) from a set of 13 numeric and factor features&lt;/font&gt;
+&lt;br4&gt;
+
+
+&lt;font size = 3&gt;Source: UCI Machine Learning Database&lt;/font&gt;
+
+
+
+---
+## 4 Steps to using FFTrees in R
+
+.pull-left15[
+&lt;br3&gt;&lt;br3&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;font size = 5&gt;0.Install&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;1. Load&lt;/font&gt;
+&lt;br&gt;
+
+&lt;font size = 5&gt;2. Create&lt;/font&gt;
+&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br4&gt;
+&lt;font size = 5&gt;3. Print&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;4. Plot&lt;/font&gt;
+&lt;br&gt;
+
+]
+
+.pull-right85[
+
+&lt;br&gt;
+
+
+```r
+# Step 0: Install FFTrees from CRAN
+install.packages("FFTrees")
+
+# Step 1: Load FFTrees
+library(FFTrees)
+
+#  Step 2: Create the FFTrees object
+heart_FFT &lt;- FFTrees(formula = diagnosis ~., # Criterion
+                     data = heart.train,     # Training data
+                     data.test = heart.test, # Testing data
+                     main = "Heart Disease", # Optional Labels
+                     decision.labels = c("Healthy", "Diseased")) 
+
+# Step 3: Print the object
+heart_FFT
+
+# Step 4: Plot the tree and accuracy statistics
+plot(heart_FFT)
+```
+
+]
+
+---
+## plot(heart_FFT, stats = FALSE)
+
+---
+count: false
+
+
+## plot(heart_FFT, stats = FALSE)
+
+.pull-left5[
+
+&lt;img src="images/heart_fft_nostats_2.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+###thal
+&lt;br2&gt;
+
+&lt;font size=5&gt;Imaging test that measures blood flow to the heart&lt;/font&gt;
+
+### cp
+&lt;br2&gt;
+
+&lt;font size=5&gt;Type of chest pain&lt;/font&gt;
+
+### ca
+&lt;br2&gt;
+
+&lt;font size=5&gt;Number of major vessels colored by fluoroscopy&lt;/font&gt;
+
+
+]
+---
+
+## plot(heart_FFT)
+
+---
+count: false
+
+## plot(heart_FFT)
+
+.pull-left7[
+
+&lt;img src="images/heart_fft_train.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Dataset description&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Tree and decisions displayed as &lt;b&gt;icon arrays&lt;/b&gt;*&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Aggregate classification statistics&lt;/font&gt;
+
+
+&lt;br&gt;
+
+&lt;font size = 3&gt;* Galesic, et al. (2009). Using icon arrays to communicate medical risks&lt;/font&gt;
+
+]
+
+
+
+---
+.pull-left3[
+
+## Why Icon Arrays?
+
+Help people quickly and easily compare relative frequencies
+
+Much clearer than probabilities
+
+Emphasizes absolute differences in risk rather than relative risk
+
+&lt;b&gt;Contraceptive Pill Scare&lt;/b&gt;
+
+Relative Risk: You're 100% more likely to develop thrombosis (a life threatening blood clot) if you take the latest contraceptive pill
+
+Absolute Risk: Previous: 1 / 7000  versus Latest: 2 / 7000
+
+
+]
+
+
+.pull-right7[
+
+
+&lt;img src="images/iconarray_psa_harding.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+count: false
+
+## plot(heart_FFT)
+
+.pull-left7[
+
+&lt;img src="images/heart_train_roc.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Algorithm comparison in ROC space&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Multiple FFTs with different error trade-offs.&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+]
+
+---
+
+## plot(heart_FFT, data = "test")
+
+
+.pull-left7[
+
+
+&lt;img src="images/heart_fft_test.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Easily apply tree to &lt;b&gt;new, test data&lt;/b&gt;&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Look for changes in when decisions are made, and when &lt;b&gt;errors&lt;/b&gt; occur&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Compare prediction accuracy to other algorithms&lt;/font&gt;
+
+]
+
+---
+
+
+&lt;h2&gt; &amp;emsp; &amp;emsp; &amp;emsp;    &amp;emsp;Training &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; &amp;emsp;  Testing&lt;/h2&gt;
+
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/train_v_test_roc.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## plot(heart_FFT, data = "test", tree = 7)
+
+.pull-left7[
+
+&lt;img src="images/heart_fft_test_tree7.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Explore trees with different &lt;b&gt;exit structures&lt;/b&gt; and &lt;b&gt;error trade-offs&lt;/b&gt;&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Tree #7 has a very low false-alarm rate but a huge number of misses&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+]
+
+---
+## plot(heart_FFT, data = "test", tree = 6)
+
+.pull-left7[
+
+&lt;img src="images/heart_fft_test_tree6.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right3[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Explore trees with different &lt;b&gt;exit structures&lt;/b&gt; and &lt;b&gt;error trade-offs&lt;/b&gt;&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Tree #6 has very few misses but a huge number of false-alarms&gt;&lt;/font&gt;
+
+&lt;br&gt;&lt;br&gt;
+]
+
+---
+
+.pull-left35[
+
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+]
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;What is the best split for feature X?&lt;/font&gt;
+
+&lt;img src="images/threshold.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+
+.pull-left35[
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;font size = 5&gt;What are the top M features?&lt;/font&gt;
+&lt;br&gt;
+&lt;img src="images/selectcues.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+
+.pull-left35[
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;3. Create `\((M - 1)^2\)` trees with all possible exit structures.&lt;/font&gt;
+
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_exits_heart_A.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+count: false
+
+
+.pull-left35[
+
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;3. Create `\((M - 1)^2\)` trees with all possible exit structures.&lt;/font&gt;
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_exits_heart_B.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+count: false
+
+
+.pull-left35[
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;3. Create `\((M - 1)^2\)` trees with all possible exit structures.&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;4. Select the tree that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_exits_roc_A.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+count: false
+
+
+.pull-left35[
+
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;3. Create `\((M - 1)^2\)` trees with all possible exit structures.&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;4. Select the tree that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_exits_roc_B.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+count: false
+
+
+
+.pull-left35[
+
+&lt;br&gt;&lt;br&gt;
+## "Fan" Algorithm
+
+&lt;br&gt;
+&lt;font size = 5&gt;1. For each feature, calculate a threshold that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+&lt;br4&gt;
+
+
+
+&lt;font size = 5&gt;2. Rank order features by &lt;font color = 'red'&gt;accuracy&lt;/font&gt; and select top &lt;font color = 'red'&gt;M&lt;/font&gt; features.&lt;/font&gt;
+&lt;br4&gt;
+
+
+&lt;font size = 5&gt;3. Create `\((M - 1)^2\)` trees with all possible exit structures.&lt;/font&gt;
+&lt;br4&gt;
+
+&lt;font size = 5&gt;4. Select the tree that maximizes &lt;font color = 'red'&gt;accuracy&lt;/font&gt;&lt;/font&gt;
+
+]
+
+
+.pull-right55[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_exits_roc_C.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+
+&lt;br&gt;&lt;br&gt;
+&gt; # Bonus Features
+
+
+
+---
+
+
+.pull-left3[
+&lt;br&gt;&lt;br&gt;
+## Bonus Features
+&lt;br&gt;&lt;br&gt;
+
+
+&lt;font size = 5&gt;1. Missing data? No problem.&lt;/font&gt;
+
+]
+
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fft_missing.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+.pull-left3[
+&lt;br&gt;&lt;br&gt;
+## Bonus Features
+
+&lt;br&gt;&lt;br&gt;
+
+
+&lt;font size = 5&gt;1. Missing data? No problem.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;2. Implement your own custom tree verbally.&lt;/font&gt;
+
+
+]
+
+.pull-right6[
+&lt;br&gt;
+&lt;img src="images/myfft_ss.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left3[
+
+&lt;br&gt;&lt;br&gt;
+## Bonus Features
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;1. Missing data? No problem.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;2. Implement your own custom tree verbally.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;3. Minimize feature costs.&lt;/font&gt;
+
+]
+
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+### Heart Disease feature costs
+
+&lt;br&gt;
+
+|     |age  |sex  |cp   |trestbps |chol |fbs  |restecg    |ca     |thal   |
+|:----|:----|:----|:----|:--------|:----|:----|:-----|:------|:------|
+|cost |$1 |$1 |$1 |$1     |$7 |$5 |$16  |$101 |$103 |
+
+
+&lt;font size = 5&gt; Create FFTs that &lt;i&gt;minimize&lt;/i&gt; costs&lt;/font&gt;
+&lt;br4&gt;
+
+
+```r
+# Minimise costs
+FFTrees(data = heart.train,
+        cost.cues = heart.cost,        # Feature costs
+        cost.outcomes = c(0, 1, 1, 0), # Outcome costs
+        goal = "cost")
+```
+
+
+
+
+]
+
+
+---
+
+.pull-left3[
+
+&lt;br&gt;&lt;br&gt;
+## Bonus Features
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;1. Missing data? No problem.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;2. Implement your own custom tree verbally.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;3. Minimize feature costs.&lt;/font&gt;
+
+]
+
+
+.pull-right6[
+
+### Cost Ignorant FFT
+
+&lt;img src="images/cost_ignorant_fft.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+| | Cost Ignorant|Cost Minimizing |Change |
+|------:|:----:|:-----:|:----:|
+|     Cost / Patient|    $138|   &lt;font color = "gray"&gt;?&lt;/font&gt;   |   &lt;font color = "gray"&gt;?&lt;/font&gt; |
+|     Accuracy|    81%|   &lt;font color = "gray"&gt;?&lt;/font&gt;  | &lt;font color = "gray"&gt;?&lt;/font&gt;  |
+
+]
+
+---
+
+.pull-left3[
+
+&lt;br&gt;&lt;br&gt;
+## Bonus Features
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;1. Missing data? No problem.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;2. Implement your own custom tree verbally.&lt;/font&gt;
+
+&lt;br4&gt;
+
+&lt;font size = 5&gt;3. Minimize feature costs.&lt;/font&gt;
+
+]
+
+
+.pull-right6[
+
+### Cost Minimising FFT
+
+&lt;img src="images/cost_minimising_fft.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+| | Cost Ignorant|Cost Minimizing |Change |
+|------:|:----:|:-----:|:----:|
+|     Cost / Patient|    $138| $2     |&lt;font color="blue"&gt;-99%&lt;/font&gt;    |
+|     Accuracy|    81%|77%     |&lt;font color="red"&gt;-5%&lt;/font&gt;    |
+
+]
+
+
+---
+## ShinyFFTrees: http://www.shinyfftrees.org
+
+&lt;iframe src="https://econpsychbasel.shinyapps.io/shinyfftrees/" width="1100" height="500"&gt;&lt;/iframe&gt;
+
+
+---
+&lt;br&gt;&lt;br&gt;
+&gt; #But how well can a simple FFT actually predict data?
+
+---
+.pull-left4[
+&lt;br&gt;&lt;br&gt;
+## When will FFTs fail?
+
+It is not difficult to imagine datasets where FFTs will fail&lt;br&gt;
+
+FFTs will do poorly when...
+
+- Strong interactions
+- Noisy individual predictors with strong additive performance
+
+FFTs will do well when...
+
+- No strong interactions
+- A few individual predictors have strong performance
+
+]
+
+
+.pull-right55[
+
+### Prediction Simulation 
+
+Two simulated datasets (4 features each) one with a strong interaction, one without
+
+&lt;img src="images/interaction_simulation.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+Conclusion: CART is consistently better than FFTrees when there are strong interactions
+
+]
+
+---
+
+.pull-left5[
+
+## 10 datasets from UCI ML database
+
+&lt;img src="images/ten_datasets.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Procedure: 100 50/50 Cross validation simulations&lt;/font&gt;
+&lt;br3&gt;
+&lt;font size = 5&gt;Criterion: Balanced Accuracy&lt;/font&gt;
+&lt;br3&gt;
+
+`\(\Large bacc = mean(sens, spec)\)`
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+
+| title| cases|features |base rate |
+|------:|----:|:-----|:----|
+|     arrhythmia|    68|280     |0.29    |
+|     audiology|    226|70     |0.10    |
+|     breast|    683|10     |0.35    |
+|     cmc|    1,473|10    |0.35    |
+|     credit|    666|16     |0.45    |
+|     dermatology|   358|35     |0.31    |
+|     heart|   303     |14    |0.46
+|     occupancy|   17,895|6     |0.21    |
+|     voting|   435     |17    |0.61 |
+|     yeast|   1,484     |19    |0.16 |
+
+
+]
+
+
+---
+
+&lt;img src="images/simulation_speed_1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_speed_2.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_speed_3.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&gt;# Across all datasets, FFTrees reached __% of the accuracy of random forests
+
+
+---
+
+&lt;img src="images/simulation_accuracy_1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+count: false
+&lt;img src="images/simulation_accuracy_2.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_accuracy_3.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_accuracy_4.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_accuracy_5.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+count: false
+
+&lt;img src="images/simulation_accuracy_6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="images/simulation_accuracy_tree_1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="images/simulation_accuracy_tree_2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&gt;# Across all datasets, FFTrees reached __% of the accuracy of random forests
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&gt;# Across all datasets, FFTrees reached &lt;b&gt;&lt;font color='blue'&gt;98%&lt;/font&gt;&lt;/b&gt; of the accuracy of random forests
+
+
+---
+
+## What I've learned from FFTrees
+
+.pull-left55[
+
+Simple models can be surprisingly effective (see also [Holte 1993](https://link.springer.com/content/pdf/10.1023/A:1022631118932.pdf), [Gigerenzer &amp; Brighton, 2009](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1756-8765.2008.01006.x) and [Ustun &amp; Rudin, 2016](https://link.springer.com/content/pdf/10.1007%2Fs10994-015-5528-6.pdf)
+)
+
+It is easy to be seduced by a complexity, teasing you with the illusion of certainty
+
+There is no "best" model. All models, from FFTs to Deep Learning, will fail. *When a model fails, it's important to know why*
+
+&lt;img src="images/selfdrivinguber.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right4[
+
+&lt;img src="images/holte_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="images/homoheuristicus_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="images/slim_ss.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+---
+
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="images/animal complexity.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+
+.pull-left5[
+&lt;br&gt;
+### How you can use FFTrees
+
+Check for a few extremely predictive features in your data.
+
+Use as a performance reference for other algorithms.
+
+Communicate the basics of machine learning (accuracy, sensitivity, specificity) to non--experts
+
+&lt;i&gt;Make decisions!&lt;/i&gt;
+
+### Next steps
+
+Re-write algorithm in C++
+
+Include parameter fitting with cross validation
+
+
+]
+
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heart_fft_test.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+
+class: title-slide-custom
+
+.pull-left65[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+## Create powerful, transparent decision aids with FFTrees
+
+&lt;br&gt;
+
+&lt;font size = 6&gt; Dr. Nathaniel D. Phillips&lt;br&gt;&lt;br3&gt;&lt;a href="http://phcanalytics.roche.com/"&gt;PD PHC Data Science&lt;/a&gt;&lt;/font&gt;
+&lt;br&gt;&lt;br3&gt;
+
+&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://go.roche.com/BDE_FFTrees'&gt;https://go.roche.com/BDE_FFTrees&lt;/a&gt;&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;font size = 5&gt;Roche, Basel Data Enthusiasts and Skeptics, 9 July, 2018&lt;/font&gt;
+
+&lt;br&gt;
+]
+
+.pull-right35[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heartfft.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+# Backup Slides
+
+
+
+
+
+
+---
+
+.pull-left5[
+&lt;br&gt;&lt;br&gt;
+## Next steps
+&lt;br&gt;
+### Programming
+
+- Write in C++
+- Automate cross-validation to optimize parameters
+- Allow for &gt; 2 classes
+- Error monitoring and error diagnosis
+
+### Applications
+
+- When do FFTs work well and when not?
+- Compare other published regression techniques to FFTs
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heart_fft_test.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+## Overfitting
+
+.pull-left5[
+
+&lt;font size=5&gt;Data = Underlying functional form (signal) + irreducible error (noise).&lt;/font&gt;
+&lt;br&gt;
+
+`\(\LARGE Y = f(x) + \epsilon\)`
+
+&lt;br&gt;
+&lt;font size=5&gt;A good model will try to approximate the true signal&lt;/font&gt;
+&lt;br&gt;
+
+`\(\LARGE E(Y - \widehat{Y})^2 = [f(X) - \widehat{f}(X)]^2 + Var(\epsilon)\)`
+
+&lt;br&gt;
+&lt;font size=5&gt;However, prediction error is a combination of bias *and* variance&lt;/font&gt;
+&lt;br&gt;
+
+`\(\large E(PredError) = Var(\hat{f}(x_{0})) + [Bias(\hat{f}(x_{0}))]^2 + Var(\epsilon)\)`
+
+&lt;br&gt;
+*James et al. (2013). An Introduction to Statistical Learning*
+
+]
+
+
+.pull-right5[
+
+&lt;br&gt;
+&lt;br&gt;
+Given heavy irreducible noise, a simple model may outperform a complex one.
+&lt;br&gt;
+
+&lt;img src="images/overfitting_darts.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+## Icon Arrays
+
+
+&lt;img src="images/contraceptive_iconarray.png" width="80%" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

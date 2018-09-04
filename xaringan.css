@@ -1,0 +1,300 @@
+/* Two-column layout */
+
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+body { font-family: 'Lato', 'Droid Serif', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif; }
+h1, h2, h3 {
+  font-family: 'Lato';
+  font-weight: normal;
+}
+a, a > code {
+  color: rgb(249, 38, 114);
+  text-decoration: none;
+}
+.footnote {
+  position: absolute;
+  bottom: 3em;
+  padding-right: 4em;
+  font-size: 90%;
+}
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; }
+.remark-code-line-highlighted     { background-color: #ffff88; }
+
+.inverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #f3f3f3;
+  line-height: 1.0em;
+}
+/* Two-column layout */
+.left-column {
+  color: #777;
+  width: 20%;
+  height: 92%;
+  float: left;
+}
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+.right-column {
+  width: 75%;
+  float: right;
+  padding-top: 1em;
+}
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}
+.pull-right ~ * {
+  clear: both;
+}
+img, video, iframe {
+  max-width: 100%;
+}
+blockquote {
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
+}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee }
+
+@page { margin: 0; }
+@media print {
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+
+.small-code .remark-code {
+    font-size: 80%;
+}
+.small h1, h2, h3 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.small .remark-code {
+    font-size: 80%;
+}
+
+.title-slide-custom .remark-slide-number {
+  display: none;
+}
+
+.inline-grey code {
+  background: #F5F5F5; /* lighter */
+  /* background: #e7e8e2; /* darker */
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.pull-left05 {
+  float: left;
+  width: 5%;
+}
+.pull-right05 {
+  float: right;
+  width: 5%;
+}
+
+.pull-left1 {
+  float: left;
+  width: 10%;
+}
+.pull-right1 {
+  float: right;
+  width: 10%;
+}
+
+.pull-left15 {
+  float: left;
+  width: 15%;
+}
+.pull-right15 {
+  float: right;
+  width: 15%;
+}
+
+.pull-left2 {
+  float: left;
+  width: 20%;
+}
+.pull-right2 {
+  float: right;
+  width: 20%;
+}
+
+.pull-left25 {
+  float: left;
+  width: 25%;
+}
+.pull-right25 {
+  float: right;
+  width: 25%;
+}
+
+.pull-left3 {
+  float: left;
+  width: 30%;
+}
+.pull-right3 {
+  float: right;
+  width: 30%;
+}
+
+.pull-left35 {
+  float: left;
+  width: 35%;
+}
+.pull-right35 {
+  float: right;
+  width: 35%;
+}
+
+.pull-left4 {
+  float: left;
+  width: 40%;
+}
+.pull-right4 {
+  float: right;
+  width: 40%;
+}
+
+.pull-left45 {
+  float: left;
+  width: 45%;
+}
+.pull-right45 {
+  float: right;
+  width: 45%;
+}
+
+.pull-left5 {
+  float: left;
+  width: 50%;
+}
+.pull-right5 {
+  float: right;
+  width: 50%;
+}
+
+.pull-left55 {
+  float: left;
+  width: 55%;
+}
+.pull-right55 {
+  float: right;
+  width: 55%;
+}
+
+.pull-left6 {
+  float: left;
+  width: 60%;
+}
+.pull-right6 {
+  float: right;
+  width: 60%;
+}
+
+.pull-left65 {
+  float: left;
+  width: 65%;
+}
+.pull-right65 {
+  float: right;
+  width: 65%;
+}
+
+.pull-left7 {
+  float: left;
+  width: 70%;
+}
+.pull-right7 {
+  float: right;
+  width: 70%;
+}
+
+.pull-left75 {
+  float: left;
+  width: 75%;
+}
+.pull-right75 {
+  float: right;
+  width: 75%;
+}
+
+.pull-left80 {
+  float: left;
+  width: 80%;
+}
+.pull-right80 {
+  float: right;
+  width: 80%;
+}
+
+.pull-left85 {
+  float: left;
+  width: 85%;
+}
+.pull-right85 {
+  float: right;
+  width: 85%;
+}
+
+.pull-left9 {
+  float: left;
+  width: 90%;
+}
+.pull-right9 {
+  float: right;
+  width: 90%;
+}
+
+.pull-left95 {
+  float: left;
+  width: 95%;
+}
+.pull-right95 {
+  float: right;
+  width: 95%;
+}
+
+br2 {
+   display: block;
+   margin: 8px 0;
+}
+
+
+br3 {
+   display: block;
+   margin: 16px 0;
+}
+
+br4 {
+   display: block;
+   margin: 24px 0;
+}
+
+
