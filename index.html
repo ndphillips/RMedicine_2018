@@ -390,7 +390,7 @@ heart_FFT
 ---
 .pull-left55[
 
-&lt;h2&gt;&lt;font color = 'gray'&gt;print(&lt;/font&gt;heart_FFT&lt;font color = 'gray'&gt;)&lt;/font&gt;&lt;/h2&gt;
+&lt;h2&gt;print.FFTrees()&lt;/h2&gt;
 
 
 ```r
@@ -426,7 +426,7 @@ heart_FFT
 
 .pull-right4[
 
-&lt;h2&gt;plot(heart_FFT)&lt;/h2&gt;
+&lt;h2&gt;plot.FFTrees()&lt;/h2&gt;
 
 
 ```r
@@ -438,11 +438,18 @@ plot(heart_FFT, stats = FALSE)
 ]
 
 ---
-## plot(heart_FFT)
-
 .pull-left7[
 
+
+```r
+plot(heart_FFT)
+```
+
 &lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+```r
+# knitr::include_graphics("images/heart_fft_test.png")
+```
 
 ]
 
@@ -470,13 +477,19 @@ plot(heart_FFT, stats = FALSE)
 
 ---
 
-## plot(heart_FFT, data = "test")
-
-
 .pull-left7[
 
 
+
+```r
+plot(heart_FFT, data = "test")
+```
+
 &lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+```r
+# knitr::include_graphics("images/heart_fft_test.png")
+```
 
 ]
 
@@ -507,6 +520,9 @@ plot(heart_FFT, stats = FALSE)
 # We have lots of questions...
 &lt;br&gt;
 ## ~ Decision Makers
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+ok, shoot.
 
 ---
 
@@ -515,7 +531,7 @@ plot(heart_FFT, stats = FALSE)
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 ### Why did the tree make those decisions?
 &lt;br&gt;
-### What happens if you make 'minor' changes?
+### How it compares to other similar trees?
 
 ]
 
@@ -527,10 +543,13 @@ plot(heart_FFT, stats = FALSE)
 
 ---
 
-## plot(heart_FFT, data = "test")
+.pull-left55[
 
-.pull-left6[
 
+
+```r
+plot(heart_FFT, data = "test")
+```
 
 &lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -554,10 +573,13 @@ plot(heart_FFT, stats = FALSE)
 
 ---
 
-## plot(heart_FFT, data = "test", tree = 7)
+.pull-left55[
 
-.pull-left6[
 
+
+```r
+plot(heart_FFT, data = "test", tree = 7)
+```
 
 &lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -579,10 +601,13 @@ plot(heart_FFT, stats = FALSE)
 
 ---
 
-## plot(heart_FFT, data = "test", tree = 6)
+.pull-left55[
 
-.pull-left6[
 
+
+```r
+plot(heart_FFT, data = "test", tree = 6)
+```
 
 &lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -640,6 +665,8 @@ plot(heart_FFT, stats = FALSE)
 
 
 ```r
+# List of cue costs
+
 heart.cost &lt;- list(thal = 102.9, 
                    sex = 1, 
                    ca = 100.9, ...)
@@ -649,7 +676,7 @@ heart.cost &lt;- list(thal = 102.9,
 
 ```r
 FFTrees(diagnosis ~.,
-        cost.cues = heart.cost,
+        cost.cues = heart.cost,  # cue costs
         data = heart.train,
         data.test = heart.test,
         main = "Heart Disease")
@@ -686,7 +713,7 @@ FFTrees(diagnosis ~.,
 ```r
 FFTrees(diagnosis ~.,
         cost.cues = heart.cost,
-        cost.outcomes = list(mi = 75, fa = 25),
+        cost.outcomes = list(mi = 75, fa = 25), # &lt;-
         data = heart.train,
         data.test = heart.test,
         main = "Heart Disease")
@@ -733,7 +760,7 @@ FFTrees(diagnosis ~.,
 
 
 &lt;br&gt;&lt;br&gt;
-### I have a &gt;2 class prediction problem
+### I have a 3 class prediction problem
 
 &lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
 
@@ -793,10 +820,14 @@ install.packages("rpart")
 
 
 ```r
+# Specify an FFT in words
+ihaka_fft &lt;- "If age &gt; 55, predict True.
+              If cp != {a}, predict False.
+              If chol &gt; 300, predict False."
+
+# Include as my.tree
 FFTrees(formula, data,
-        my.tree = "If age &gt; 55, predict True.
-                   If cp != {a}, predict False.
-                   If chol &gt; 300, predict False.",
+        my.tree = ihaka_fft,    # Specify my.tree
         main = "My Custom FFT")
 ```
 
@@ -829,8 +860,8 @@ FFTrees(formula, data,
 
 
 
-&lt;br&gt;&lt;br&gt;
-### FFTs are nice for exploration. But they can't be that predictive.
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### FFTs are nice for non--expert data scientists. But they can't be that predictive.
 
 &lt;br&gt;&lt;br&gt;
 ### But how well can an FFT compete with more complex algorithms?
@@ -840,6 +871,8 @@ FFTrees(formula, data,
 .pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="images/fish.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+FFTrees vs. Random Forests / GBM / SVM (?)
+
 
 ]
 

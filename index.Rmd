@@ -442,7 +442,7 @@ heart_FFT
 ---
 .pull-left55[
 
-<h2><font color = 'gray'>print(</font>heart_FFT<font color = 'gray'>)</font></h2>
+<h2>print.FFTrees()</h2>
 
 ```{r, echo = TRUE}
 heart_FFT
@@ -452,7 +452,7 @@ heart_FFT
 
 .pull-right4[
 
-<h2>plot(heart_FFT)</h2>
+<h2>plot.FFTrees()</h2>
 
 ```{r, eval = FALSE, echo = TRUE}
 plot(heart_FFT, stats = FALSE)
@@ -465,11 +465,9 @@ knitr::include_graphics("images/heart_fft_nostats_2.png")
 ]
 
 ---
-## plot(heart_FFT)
-
 .pull-left7[
 
-```{r, out.width = "80%", fig.width = 7, fig.height = 6}
+```{r, echo = TRUE, out.width = "80%", fig.width = 7, fig.height = 6}
 plot(heart_FFT)
 # knitr::include_graphics("images/heart_fft_test.png")
 ```
@@ -500,14 +498,11 @@ plot(heart_FFT)
 
 ---
 
-## plot(heart_FFT, data = "test")
-
-
 .pull-left7[
 
 
-```{r, out.width = "80%", fig.width = 7, fig.height = 6}
-plot(heart_FFT, "test")
+```{r, echo = TRUE, out.width = "80%", fig.width = 7, fig.height = 6}
+plot(heart_FFT, data = "test")
 # knitr::include_graphics("images/heart_fft_test.png")
 ```
 
@@ -540,6 +535,9 @@ plot(heart_FFT, "test")
 # We have lots of questions...
 <br>
 ## ~ Decision Makers
+<br><br><br>
+
+ok, shoot.
 
 ---
 
@@ -548,7 +546,7 @@ plot(heart_FFT, "test")
 <br><br><br>
 ### Why did the tree make those decisions?
 <br>
-### What happens if you make 'minor' changes?
+### How it compares to other similar trees?
 
 ]
 
@@ -563,12 +561,10 @@ plot(heart_FFT, "test")
 
 ---
 
-## plot(heart_FFT, data = "test")
-
-.pull-left6[
+.pull-left55[
 
 
-```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+```{r, echo = TRUE, fig.width = 7, fig.height = 7, out.width = "80%"}
 plot(heart_FFT, data = "test")
 ```
 
@@ -594,12 +590,10 @@ knitr::include_graphics("images/roc_tree_1.png")
 
 ---
 
-## plot(heart_FFT, data = "test", tree = 7)
-
-.pull-left6[
+.pull-left55[
 
 
-```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+```{r, fig.width = 7, echo = TRUE, fig.height = 7, out.width = "80%"}
 plot(heart_FFT, data = "test", tree = 7)
 ```
 
@@ -623,12 +617,10 @@ knitr::include_graphics("images/roc_tree_7b.png")
 
 ---
 
-## plot(heart_FFT, data = "test", tree = 6)
-
-.pull-left6[
+.pull-left55[
 
 
-```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+```{r, echo = TRUE, fig.width = 7, fig.height = 7, out.width = "80%"}
 plot(heart_FFT, data = "test", tree = 6)
 ```
 
@@ -659,7 +651,7 @@ knitr::include_graphics("images/roc_tree_6.png")
 ### Those tests are very time consuming and expensive.
 <br>
 
-### It's much worse to miss a case than to have a false-alarm
+### It's also much worse to miss a case than to have a false-alarm
 
 <br>
 ### Can you account for these costs?
@@ -681,7 +673,7 @@ plot(heart_FFT, "test")
 <br><br>
 ## Cue costs
 
-<font size = 5>Specify the costs of cues with cost.cues</font>
+<font size = 5>Create a list of costs</font>
 <br>
 
 ```{r, include = FALSE, eval = TRUE}
@@ -694,7 +686,6 @@ heart_cost_FFT <- FFTrees(diagnosis ~.,
 ```
 
 <br>
-<font size = 5>Specify all cue costs as a named list</font>
 
 ```{r, eval = FALSE, echo = TRUE}
 # List of cue costs
@@ -704,10 +695,12 @@ heart.cost <- list(thal = 102.9,
                    ca = 100.9, ...)
 ```
 
+<font size = 5>Include list of costs as cost.cues</font>
+
 
 ```{r, echo = TRUE, eval = FALSE}
 FFTrees(diagnosis ~.,
-        cost.cues = heart.cost,   # Include cue costs
+        cost.cues = heart.cost,  # cue costs
         data = heart.train,
         data.test = heart.test,
         main = "Heart Disease")
@@ -752,7 +745,7 @@ heart_cost_FFT <- FFTrees(diagnosis ~.,
 ```{r, echo = TRUE, eval = FALSE}
 FFTrees(diagnosis ~.,
         cost.cues = heart.cost,
-        cost.outcomes = list(mi = 75, fa = 25),
+        cost.outcomes = list(mi = 75, fa = 25), # <-
         data = heart.train,
         data.test = heart.test,
         main = "Heart Disease")
@@ -803,7 +796,7 @@ knitr::include_graphics("images/iris_data.jpeg")
 
 
 <br><br>
-### I have a >2 class prediction problem
+### I have a 3 class prediction problem
 
 ```{r, out.width = "70%"}
 knitr::include_graphics("images/iris_data.jpeg")
@@ -878,11 +871,14 @@ heart_cost_FFT <- FFTrees(diagnosis ~.,
 
 
 ```{r, echo = TRUE, eval = FALSE}
+# Specify an FFT in words
+ihaka_fft <- "If age > 55, predict True.
+              If cp != {a}, predict False.
+              If chol > 300, predict False."
 
+# Include as my.tree
 FFTrees(formula, data,
-        my.tree = "If age > 55, predict True.
-                   If cp != {a}, predict False.
-                   If chol > 300, predict False.",
+        my.tree = ihaka_fft,    # Specify my.tree
         main = "My Custom FFT")
 
 ```
@@ -918,8 +914,8 @@ plot(heart_cost_FFT, data = "test")
 
 
 
-<br><br>
-### FFTs are nice for exploration. But they can't be that predictive.
+<br><br><br><br>
+### FFTs are nice for non--expert data scientists. But they can't be that predictive.
 
 <br><br>
 ### But how well can an FFT compete with more complex algorithms?
@@ -931,6 +927,8 @@ plot(heart_cost_FFT, data = "test")
 ```{r, out.width = "100%"}
 knitr::include_graphics("images/fish.jpg")
 ```
+FFTrees vs. Random Forests / GBM / SVM (?)
+
 
 ]
 
