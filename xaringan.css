@@ -29,6 +29,11 @@ a, a > code {
   color: #d6d6d6;
   text-shadow: 0 0 20px #333;
 }
+
+.question {
+  background-color: #DDEDFE;
+}
+
 .inverse h1, .inverse h2, .inverse h3 {
   color: #f3f3f3;
   line-height: 1.0em;
@@ -118,6 +123,47 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
   float: right;
   width: 5%;
 }
+
+
+div.center_text {
+    background-color: #EEEEEE;
+    position: absolute;
+    bottom: 45%;
+    left: 0px;
+    height: 20%;
+    width: 100%;
+	}
+
+div.center_text span{
+	display: block;
+	width: 100%;
+	  font-family: 'Yanone Kaffeesatz';
+    font-size: 60pt;
+    color: #000000;
+    position: absolute;
+    text-align: center;
+    bottom: 15%;
+    left: 0;
+	}
+	
+div.my-footer {
+    background-color: #EEEEEE;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 14px;
+    width: 100%;
+}
+div.my-footer span {
+	display: block;
+	width: 100%;
+    font-size: 8pt;
+    color: #FFFFFF;
+    position: absolute;
+    text-align: left;
+    bottom: 0px;
+    left: 20px;
+	}
 
 .pull-left1 {
   float: left;

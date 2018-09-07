@@ -14,9 +14,29 @@ output:
       ratio: '16:9'
     seal: false
 ---
+layout: true
+
+<div class="my-footer"><span>
+<font color="#7E7E7E">R/Medicine, New Haven, 7 September, 2018</font>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;
+
+<a href='https://ndphillips.github.io/RMedicine_2018/'><font color="#7E7E7E">https://ndphillips.github.io/RMedicine_2018</font></a>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+&emsp;&emsp;&emsp;&emsp;&emsp;
+
+<a href="https://ndphillips.github.io/"><font color="#7E7E7E"> nathaniel.phillips@roche.com</font></a>
+
+
+</span></div> 
+
 
 ```{r setup, include=FALSE, fig.align = 'center'}
-knitr::opts_chunk$set(echo = FALSE, fig.align = 'center')
+knitr::opts_chunk$set(echo = FALSE, fig.align = 'center', dpi = 300)
 library(FFTrees)
 
 
@@ -33,24 +53,26 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 ```
 
+
+---
 class: title-slide-custom
 
 .pull-left65[
 
-<br><br><br>
+<br>
 
-## FFTrees: How to create extremely simple, transparent, predictive decision algorithms for both machine learning and clinical decision applications.
+# FFTrees
+### How to create extremely simple, transparent, predictive decision algorithms for both machine learning and clinical decision applications.
 
 <br>
 
-<font size = 6> Dr. Nathaniel D. Phillips<br><br3><a href="http://www.roche.com/">Roche, Personalised Health Care</a></font>
-<br><br3>
+<font size = 6> Dr. Nathaniel D. Phillips, Roche<br><br3></font>
 
-<font size = 5><i class="fa fa-tv"></i>   Slides: <a href='https://ndphillips.github.io/RMedicine_2018/'>https://ndphillips.github.io/RMedicine_2018/s</a></font>
+<font size = 5><i class="fa fa-envelope"></i>  nathaniel.phillips@roche.com<br><br3></font>
+
+<font size = 5><i class="fa fa-tv"></i>   Slides: <a href='https://ndphillips.github.io/RMedicine_2018/'>https://ndphillips.github.io/RMedicine_2018</a></font>
 
 <br>
-
-<font size = 5>R/Medicine, New Haven, 7 September, 2018</font>
 
 <br>
 ]
@@ -68,7 +90,7 @@ knitr::include_graphics("images/heartfft.png")
 
 <br><br><br><br><br>
 
-# How can one make good decisions based on complex, noisy, limited information given limited resources?
+# How can a person with limited resources make good decisions based on limited, noisy, fallible information?
 
 ---
 
@@ -98,8 +120,9 @@ knitr::include_graphics(c("images/three_ex_4.png"))
 ```
 
 ---
+## Cook County Hospital, Chicago, 1990s
 
-```{r, out.width = "100%"}
+```{r, out.width = "80%"}
 knitr::include_graphics(c("images/cook_er_full.png"))
 ```
 
@@ -163,12 +186,11 @@ knitr::include_graphics(c("images/er_decision_7.png"))
 ---
 
 .pull-left5[
+<br><br>
 
 ### Problem
 
-<font size = 5>Inconsistent decisions. Too many false-alarms</font>
-
-<br>
+<font size = 5>Defensive medicine. Inconsistent decisions. Too many false-alarms</font>
 
 ### Solution
 
@@ -176,29 +198,25 @@ knitr::include_graphics(c("images/er_decision_7.png"))
 <br>
 
 ### Result
-<font size = 5>Far fewer false-alarms than doctors<font>
+<font size = 5>Far fewer false-alarms than physicians<font>
 <br4>
 
 <font size = 5>Unlike a complex regression tool, was understood and <font color = "blue">actually used</font> by physicians<font>
 
 <br4>
 
-
-> The best tool in the world is worthless if it isn't used.
-
 ]
 
-
 .pull-right5[
-
 
 ```{r, out.width = "75%"}
 knitr::include_graphics(c("images/greenmehr_fft.png"))
 ```
 
-<font size = 3>Source: Green & Mehr. (1997). What alters physician's decisions to admit to the coronary care unit?</font>
+Green & Mehr. (1997). What alters physician's decisions to admit to the coronary care unit?
 
 ]
+
 
 
 ---
@@ -208,11 +226,10 @@ knitr::include_graphics(c("images/greenmehr_fft.png"))
 <br><br><br>
 ## What is an FFT?
 <br2>
-<font size=5>A <font color = "blue">Fast-and-Frugal Tree</font> (FFT) is a highly restricted decision tree.</font>
+<font size=5>A <font color = "blue">Fast-and-Frugal Tree</font> (FFT) is a <font color = 'blue'>highly restricted decision tree</font>.</font>
 <br4>
-<font size=5>Each node in the tree must have exactly 2 branches, where 1 branch is an exit branch leading to a decision leaf.</font>
+<font size=5>Each node must have exactly 2 branches, where at least 1 branch leads to an (immediate) decision leaf.</font>
 <br4>
-<font size=5>The final node must have 2 exit branches.</font>
 <br><br><br><br><br><br>
 <font size = 3>*Martignon et al. (2003). Naive and yet enlightened: From natural frequencies to fast and frugal decision trees*</font>
 
@@ -224,32 +241,6 @@ knitr::include_graphics(c("images/greenmehr_fft.png"))
 <br>
 ```{r, out.width = "100%"}
 knitr::include_graphics(c("images/fft_definition_examples.png"))
-```
-
-]
-
-
----
-
-.pull-left4[
-<br><br><br>
-## Benefits of FFTs
-
-<font size=5>Communication, understanding, acceptance, use</font><br4>
-<font size=5>Compare to expert knowledge</font><br4>
-<font size=5>Focuses on what's most important</font><br4>
-<font size=5>Reduces cost</font><br4>
-<font size=5>Doesn't overfit - no false sense of magical abilities</font><br4>
-<font size=5>Communicates errors, transparently</font><br4>
-
-]
-
-
-.pull-right55[
-<br><br>
-
-```{r, out.width = "100%"}
-knitr::include_graphics(c("images/FFTs_benefits.png"))
 ```
 
 ]
@@ -328,29 +319,65 @@ knitr::include_graphics(c("images/terrorism_fft.png"))
 ]
 
 
+---
+
+.pull-left4[
+<br><br><br>
+## Benefits of FFTs
+
+<font size=5>Dead simple to communicate</font><br4>
+<font size=5>Can be implemented 'in the head'</font><br4>
+<font size=5>Compare to (and incorporate) expert knowledge</font><br4>
+<font size=5>Focus on a few critical pieces of information</font><br4>
+<font size=5>Low risk of overfitting - no false sense of magical abilities</font><br4>
+<font size=5>Communicate errors. Transparently.</font><br4>
+
+]
+
+.pull-right55[
+<br><br>
+
+```{r, out.width = "100%"}
+knitr::include_graphics(c("images/fft_benefits.png"))
+```
+
+]
 
 ---
 
 
-.pull-left5[
+.pull-left55[
 <br><br>
 
-### FFTrees R Package
-<br3>
-<font size = 5>v1.3.5 on CRAN (also on GitHub)</font>
-<br3>
-<font size = 5>A <font color = "blue">simple tool</font> that allows anyone to create and <font color = "blue">customize</font> FFTs</font>
-<br4>
-<font size = 5>Visualize tree decisions using <font color = "blue">icon arrays</font></font>
-<br4>
-<font size = 5>Incorporate cue and outcome<font color = "blue">costs</font></font>
-<br4>
-<font size = 5><font color = "blue">Easily compare</font> FFTs to other algorithms.</font>
+## FFTrees R Package
+
+<br>
+
+<font size = 5>A simple tool for creating, customizing, visualizing, and implementing fast-and-frugal trees</font>
+
+<br>
+<font size = 5>v1.3.5 on CRAN (v1.4.0 on GitHub)</font>
+<br>
+
+```{r, eval = FALSE, echo = TRUE}
+# Install FFTrees from CRAN
+install.packages("FFTrees")
+# devtools::install_github("ndphillips/FFTrees")
+
+# Load FFTrees
+library(FFTrees)
+```
+
+```{r, include = FALSE}
+# Step 1: Load FFTrees
+library(FFTrees)
+```
+
 
 ]
 
-.pull-right5[
-
+.pull-right45[
+<br>
 ```{r, out.width = "75%"}
 knitr::include_graphics("images/FFTrees_GitHub_ss.jpg")
 ```
@@ -361,11 +388,10 @@ knitr::include_graphics("images/FFTrees_GitHub_ss.jpg")
 
 
 ---
-## Ex) Heart Disease
+## Heart Disease
 
-<br3>
 
-<font size = 5><b>Data</b> 150 Training cases, 153 test cases</font>
+<font size = 5>Goal: Create a model to predict diagnosis (binary)</font>
 
 <br>
 
@@ -378,10 +404,15 @@ knitr::include_graphics("images/FFTrees_GitHub_ss.jpg")
 |  41|   0|aa |      130|  204|   0|hypertrophy |     172|     0|     1.4|up    |  0|normal |         0|
 |  56|   1|aa |      120|  236|   0|normal      |     178|     0|     0.8|up    |  0|normal |         0|
 
-<br>
+<br3>
 
-<font size = 5><b>Goal</b> Predict binary criterion (diagnosis) from a set of 13 numeric and factor features</font>
-<br4>
+### Two data sets
+
+<font size = 5>heart.train: (N = 150)</font><br>
+
+<font size = 5>heart.test (N = 153)</font>
+
+<br>
 
 
 <font size = 3>Source: UCI Machine Learning Database</font>
@@ -389,106 +420,61 @@ knitr::include_graphics("images/FFTrees_GitHub_ss.jpg")
 
 
 ---
-## 4 Steps to using FFTrees in R
+## Creating an FFTrees object with FFTrees()
 
-.pull-left15[
-<br3><br3>
-<br>
-<br>
-<font size = 5>0.Install</font>
-<br><br>
 
-<font size = 5>1. Load</font>
-<br>
+Create an `FFTrees` object with `FFTrees()`
 
-<font size = 5>2. Create</font>
-<br>
-<br><br>
-<br><br><br4>
-<font size = 5>3. Print</font>
-<br><br>
+```{r, echo = TRUE, eval = TRUE, message = FALSE}
+#  Create an FFTrees object
 
-<font size = 5>4. Plot</font>
-<br>
-
-]
-
-.pull-right85[
-
-<br>
-
-```{r, eval = FALSE, echo = TRUE}
-# Step 0: Install FFTrees from CRAN
-install.packages("FFTrees")
-
-# Step 1: Load FFTrees
-library(FFTrees)
-
-#  Step 2: Create the FFTrees object
-heart_FFT <- FFTrees(formula = diagnosis ~., # Criterion
-                     data = heart.train,     # Training data
-                     data.test = heart.test, # Testing data
-                     main = "Heart Disease", # Optional Labels
+heart_FFT <- FFTrees(formula = diagnosis ~.,         # Criterion
+                     data = heart.train,             # Training data
+                     data.test = heart.test,         # Testing data
+                     main = "Heart Disease",         # Optional Labels
                      decision.labels = c("Healthy", "Diseased")) 
 
-# Step 3: Print the object
-heart_FFT
+# FFTrees class
+class(heart_FFT)
 
-# Step 4: Plot the tree and accuracy statistics
-plot(heart_FFT)
+# Contains many outputs
+names(heart_FFT)
+```
+
+heart_FFT
+---
+.pull-left55[
+
+<h2><font color = 'gray'>print(</font>heart_FFT<font color = 'gray'>)</font></h2>
+
+```{r, echo = TRUE}
+heart_FFT
 ```
 
 ]
 
----
-## plot(heart_FFT, stats = FALSE)
+.pull-right4[
 
----
-count: false
+<h2>plot(heart_FFT)</h2>
 
+```{r, eval = FALSE, echo = TRUE}
+plot(heart_FFT, stats = FALSE)
+```
 
-## plot(heart_FFT, stats = FALSE)
-
-.pull-left5[
-
-```{r, out.width = "70%"}
+<br><br>
+```{r, out.width = "70%", eval = TRUE}
 knitr::include_graphics("images/heart_fft_nostats_2.png")
 ```
-
 ]
 
-.pull-right5[
-<br><br><br>
-###thal
-<br2>
-
-<font size=5>Imaging test that measures blood flow to the heart</font>
-
-### cp
-<br2>
-
-<font size=5>Type of chest pain</font>
-
-### ca
-<br2>
-
-<font size=5>Number of major vessels colored by fluoroscopy</font>
-
-
-]
 ---
-
-## plot(heart_FFT)
-
----
-count: false
-
 ## plot(heart_FFT)
 
 .pull-left7[
 
-```{r, out.width = "80%"}
-knitr::include_graphics("images/fft_labels.png")
+```{r, out.width = "80%", fig.width = 7, fig.height = 6}
+plot(heart_FFT)
+# knitr::include_graphics("images/heart_fft_test.png")
 ```
 
 ]
@@ -501,14 +487,12 @@ knitr::include_graphics("images/fft_labels.png")
 
 <br><br>
 
-<font size = 5>Tree and decisions displayed as <b>icon arrays</b>*</font>
+<font size = 5>Tree and decisions displayed as icon arrays*</font>
 
-<br><br><br>
+<br><br><br><br><br>
 
 <font size = 5>Aggregate classification statistics</font>
 
-
-<br>
 
 <font size = 3>* Galesic, et al. (2009). Using icon arrays to communicate medical risks</font>
 
@@ -518,33 +502,6 @@ knitr::include_graphics("images/fft_labels.png")
 
 
 ---
-count: false
-
-## plot(heart_FFT)
-
-.pull-left7[
-
-```{r, out.width = "100%"}
-knitr::include_graphics("images/heart_train_roc.png")
-```
-
-]
-
-.pull-right3[
-
-<br>
-
-<font size = 5>Algorithm comparison in ROC space</font>
-
-<br><br>
-
-<font size = 5>Multiple FFTs with different error trade-offs.</font>
-
-<br><br><br>
-
-]
-
----
 
 ## plot(heart_FFT, data = "test")
 
@@ -552,8 +509,9 @@ knitr::include_graphics("images/heart_train_roc.png")
 .pull-left7[
 
 
-```{r, out.width = "80%"}
-knitr::include_graphics("images/heart_fft_test.png")
+```{r, out.width = "80%", fig.width = 7, fig.height = 6}
+plot(heart_FFT, "test")
+# knitr::include_graphics("images/heart_fft_test.png")
 ```
 
 ]
@@ -562,13 +520,13 @@ knitr::include_graphics("images/heart_fft_test.png")
 
 <br>
 
-<font size = 5>Easily apply tree to <b>new, test data</b> with data = "test"</font>
+<font size = 5>Apply tree to new, test data with data = "test"</font>
 
 <br><br>
 
-<font size = 5>Look for changes in decisions, and diagnose <b>errors</b> occur</font>
+<font size = 5>Look for changes in decisions, and diagnose errors</font>
 
-<br><br><br>
+<br><br><br><br>
 
 <font size = 5>Compare prediction accuracy to other algorithms</font>
 
@@ -577,247 +535,287 @@ knitr::include_graphics("images/heart_fft_test.png")
 
 ---
 
+<br>
+## Why did the tree make those decisions? What happens if you adjust its exit structure?
+
+
+```{r, out.width = "50%", fig.width = 7, fig.height = 6}
+plot(heart_FFT, "test")
+# knitr::include_graphics("images/heart_fft_test.png")
+```
+
+
+
+---
+
+## plot(heart_FFT, data = "test")
+
+.pull-left6[
+
+
+```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+plot(heart_FFT, data = "test")
+```
+
+
+]
+
+.pull-right4[
+
+<font size = 5>FFTrees objects contain many FFTs spanning ROC space.</font>
+<br><br>
+
+<font size = 5>Use the tree = X argument to explore different trees</font>
+<br>
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/roc_tree_1.png")
+```
+
+
+]
+
+
+
+---
+
 ## plot(heart_FFT, data = "test", tree = 7)
 
-.pull-left7[
+.pull-left6[
 
-```{r, out.width = "80%"}
-knitr::include_graphics("images/heart_fft_test_tree7.png")
+
+```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+plot(heart_FFT, data = "test", tree = 7)
 ```
+
 
 ]
 
-.pull-right3[
+.pull-right4[
 
+<font size = 5>FFTrees objects contain many FFTs spanning ROC space.</font>
 <br><br>
 
-<font size = 5>Explore trees with different <b>exit structures</b> and <b>error trade-offs</b></font>
+<font size = 5>Use the tree = X argument to explore different trees</font>
+<br>
 
-<br><br>
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/roc_tree_7b.png")
+```
 
-<font size = 5>Tree #7 has a very low false-alarm rate but a huge number of misses</font>
-
-<br><br>
 
 ]
 
 ---
+
 ## plot(heart_FFT, data = "test", tree = 6)
 
-.pull-left7[
-
-```{r, out.width = "80%"}
-knitr::include_graphics("images/heart_fft_test_tree6.png")
-```
-
-]
-
-.pull-right3[
-
-<br><br>
-
-<font size = 5>Explore trees with different <b>exit structures</b> and <b>error trade-offs</b></font>
-
-<br><br>
-
-<font size = 5>Tree #6 has very few misses but a huge number of false-alarms></font>
-
-<br><br>
-]
+.pull-left6[
 
 
----
-
-
-<br><br>
-> # Bonus Features
-
-
-
----
-
-
-.pull-left3[
-<br><br>
-## Bonus Features
-<br><br>
-
-
-<font size = 5>1. Missing data? No problem.</font>
-
-]
-
-
-.pull-right6[
-<br><br><br>
-```{r, out.width = "100%"}
-knitr::include_graphics("images/fft_missing.png")
+```{r, fig.width = 7, fig.height = 7, out.width = "80%"}
+plot(heart_FFT, data = "test", tree = 6)
 ```
 
 
 ]
 
+.pull-right4[
 
----
-
-.pull-left3[
-<br><br>
-## Bonus Features
-
+<font size = 5>FFTrees objects contain many FFTs spanning ROC space.</font>
 <br><br>
 
-
-<font size = 5>1. Missing data? No problem.</font>
-
-<br4>
-
-<font size = 5>2. Implement your own custom tree verbally.</font>
-
-
-]
-
-.pull-right6[
-<br>
-```{r, out.width = "90%"}
-knitr::include_graphics("images/myfft_ss.png")
-```
-
-]
-
----
-
-.pull-left3[
-
-<br><br>
-## Bonus Features
-
-<br><br>
-
-<font size = 5>1. Missing data? No problem.</font>
-
-<br4>
-
-<font size = 5>2. Implement your own custom tree verbally.</font>
-
-<br4>
-
-<font size = 5>3. Minimize feature and error costs.</font>
-
-]
-
-
-.pull-right6[
-<br><br>
-### Heart Disease feature costs
-
+<font size = 5>Use the tree = X argument to explore different trees</font>
 <br>
 
-|     |age  |sex  |cp   |trestbps |chol |fbs  |restecg    |ca     |thal   |
-|:----|:----|:----|:----|:--------|:----|:----|:-----|:------|:------|
-|cost |$1 |$1 |$1 |$1     |$7 |$5 |$16  |$101 |$103 |
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/roc_tree_6.png")
+```
 
 
-<font size = 5> Create FFTs that <i>minimize</i> costs</font>
-<br4>
+]
+
+---
+
+## Those tests are very time consuming. It makes no sense to do them for every patient.
+
+```{r, fig.width = 6, fig.height = 6, out.width = "45%"}
+plot(heart_FFT, data = "test")
+```
+
+---
+
+.pull-left55[
+<br><br>
+## Cue costs
+
+<font size = 5>Specify the costs of cues with cost.cues</font>
+<br>
+
+```{r, include = FALSE, eval = TRUE}
+heart_cost_FFT <- FFTrees(diagnosis ~.,
+                          cost.cues = heart.cost,
+                          data = heart.train,
+                          data.test = heart.test,
+                          main = "Heart Disease")
+
+```
+
+<br>
+<font size = 5>Specify all cue costs as a named list</font>
 
 ```{r, eval = FALSE, echo = TRUE}
-# Minimise costs
-FFTrees(data = heart.train,
-        cost.cues = heart.cost,        # Feature costs
-        cost.outcomes = c(0, 1, 1, 0), # Outcome costs
-        goal = "cost")
+heart.cost <- list(thal = 102.9, 
+                   sex = 1, 
+                   ca = 100.9, ...)
 ```
 
 
+```{r, echo = TRUE, eval = FALSE}
+FFTrees(diagnosis ~.,
+        cost.cues = heart.cost,
+        data = heart.train,
+        data.test = heart.test,
+        main = "Heart Disease")
+```
 
+<font size = 5>The tree now excludes the most expensive tests</font>
+
+
+]
+
+.pull-right45[
+<br><br><br>
+```{r, echo = FALSE, fig.width = 7, fig.height = 7}
+plot(heart_cost_FFT, data = "test")
+```
+
+]
+
+---
+
+.pull-left55[
+<br>
+## Include outcome costs
+
+<font size = 5>Specify the costs of decision outcomes with cost.outcomes</font>
+
+- hi (Hits) = $0
+- mi (Misses) = $75
+- fa (False Alarms) = $25
+- cr (Correct Rejections) = $0
+
+```{r, include = FALSE, eval = TRUE}
+heart_cost_FFT <- FFTrees(diagnosis ~.,
+                          cost.cues = heart.cost,
+                          cost.outcomes = list(mi = 75, fa = 25),
+                          data = heart.train,
+                          data.test = heart.test,
+                          main = "Heart Disease")
+```
+
+
+```{r, echo = TRUE, eval = FALSE}
+FFTrees(diagnosis ~.,
+        cost.cues = heart.cost,
+        cost.outcomes = list(mi = 75, fa = 25),
+        data = heart.train,
+        data.test = heart.test,
+        main = "Heart Disease")
+```
+
+<font size = 5>The tree now tries to minimize both outcome <i>and</i> cue cost</font>
+
+]
+
+.pull-right45[
+<br><br><br>
+```{r, echo = FALSE, fig.width = 7, fig.height = 7}
+plot(heart_cost_FFT, data = "test")
+```
 
 ]
 
 
 ---
 
-.pull-left3[
-
-<br><br>
-## Bonus Features
-
-<br><br>
-
-<font size = 5>1. Missing data? No problem.</font>
-
-<br4>
-
-<font size = 5>2. Implement your own custom tree verbally.</font>
-
-<br4>
-
-<font size = 5>3. Minimize feature and error costs.</font>
-
-]
+<br>
+## Could you try creating a tree like this?
 
 
-.pull-right6[
-
-### Cost Ignorant FFT
-
-```{r, out.width = "80%"}
-knitr::include_graphics("images/cost_ignorant_fft.png")
+```{r, out.width = "40%"}
+knitr::include_graphics("images/custom_heart_fft.png")
 ```
 
-| | Cost Ignorant|Cost Minimizing |Change |
-|------:|:----:|:-----:|:----:|
-|     Cost / Patient|    $138|   <font color = "gray">?</font>   |   <font color = "gray">?</font> |
-|     Accuracy|    81%|   <font color = "gray">?</font>  | <font color = "gray">?</font>  |
+<br>
 
-]
 
 ---
 
-.pull-left3[
+.pull-left55[
 
-<br><br>
-## Bonus Features
+## Create "my tree"
 
-<br><br>
+```{r, include = FALSE, eval = TRUE}
+heart_cost_FFT <- FFTrees(diagnosis ~.,
+                          cost.cues = list(thal = 102.9, ca = 100.9),
+                          cost.outcomes = list(mi = 75, fa = 25),
+                          data = heart.train,
+                          data.test = heart.test,
+                          main = "My Custom FFT",
+                          my.tree = "If age > 55, predict True.
+                                     If cp != {a}, predict False.
+                                     If chol > 300, predict False.")
 
-<font size = 5>1. Missing data? No problem.</font>
+```
 
-<br4>
+<br>
+<font size = 5>Specify a custom FFT in words using the my.tree argument</font>
 
-<font size = 5>2. Implement your own custom tree verbally.</font>
 
-<br4>
+```{r, echo = TRUE, eval = FALSE}
 
-<font size = 5>3. Minimize feature and error costs.</font>
+FFTrees(formula, data,
+        my.tree = "If age > 55, predict True.
+                   If cp != {a}, predict False.
+                   If chol > 300, predict False.",
+        main = "My Custom FFT")
+
+```
+
+
+<font size = 5>As long as you specify a few simple rules, the result will be a 'legit' FFTrees object</font>
 
 ]
 
+.pull-right45[
 
-.pull-right6[
-
-### Cost Minimising FFT
-
-```{r, out.width = "80%"}
-knitr::include_graphics("images/cost_minimising_fft.png")
+<br><br><br>
+```{r, echo = FALSE, fig.width = 7, fig.height = 7}
+plot(heart_cost_FFT, data = "test")
 ```
-
-| | Cost Ignorant|Cost Minimizing |Change |
-|------:|:----:|:-----:|:----:|
-|     Cost / Patient|    $138| $2     |<font color="blue">-99%</font>    |
-|     Accuracy|    81%|77%     |<font color="red">-5%</font>    |
 
 ]
 
 
 ---
+
 <br><br>
-> #But how well can a simple FFT actually predict data?
+## How well can an FFT compete with more complex algorithms?
+
+
+--
+
+```{r, out.width = "60%"}
+knitr::include_graphics("images/fish.jpg")
+```
+
 
 ---
 
 .pull-left5[
 
-## 10 datasets from UCI ML database
+## Prediction Simulation
 
 ```{r, out.width = "100%"}
 knitr::include_graphics("images/ten_datasets.png")
@@ -825,12 +823,16 @@ knitr::include_graphics("images/ten_datasets.png")
 
 <br>
 
-<font size = 5>Procedure: 100 50/50 Cross validation simulations</font>
-<br3>
-<font size = 5>Criterion: Balanced Accuracy</font>
+
+<font size = 5>10 data sets from the UCI ML repository</font><br3>
+
+<font size = 5>FFTrees v CART v Regression v. Random Forests v. Support Vector Machines (...)</font>
 <br3>
 
-$\Large bacc = mean(sens, spec)$
+<font size = 5>100 50/50 Cross validation simulations</font>
+<br3>
+<font size = 5>Criterion: PredictionBalanced Accuracy</font>
+<br3>
 
 ]
 
@@ -854,53 +856,63 @@ $\Large bacc = mean(sens, spec)$
 ]
 
 ---
-.pull-left5[
-<br><br>
-
-## Make a Prediction!
-<br><br>
-<h3>Across 10 datasets, I am 90% confident FFTrees reached between <font color='gray'>HIGH</font> % and <font color='gray'>LOW</font> % of the accuracy of random forests</h2>
-
-]
-
-.pull-right45[
-
-```{r, out.width = "80%"}
-knitr::include_graphics("images/simulation_prediction_thermometer.png")
-```
-
-
-]
-
----
-### Simulation Results
+## Prediction Simulation
 
 <br>
+
+```{r, out.width = "100%"}
+knitr::include_graphics("images/FFTrees_simulation_performance_blank.png")
+```
+
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
+
+---
+## Prediction Simulation
+
+<br>
+
 ```{r, out.width = "100%"}
 knitr::include_graphics("images/FFTrees_simulation_performance.png")
 ```
 
-### > Simple models can be surprisingly difficult to outperform
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
+
+
+---
+## Prediction Simulation
+
+<br>
+
+```{r, out.width = "100%"}
+knitr::include_graphics("images/FFTrees_simulation_performance_A.png")
+```
+
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
 
 ---
 
-.pull-left5[
+.pull-left55[
+<br><br>
+## What is FFTrees?
+
+<br2>
+
+<font size = 5>A flexible, interactive tool to create simple, effective, lost-cost decision aids</font><br><br2>
+
+
+<font size = 5>Try it out, see what insights it provides.</font>
+
 <br>
-### How you can use FFTrees
 
-See how well a stupid simple fast-and-frugal tree can predict data
+## What is it not?
+<br3>
+<font size = 5>A free lunch.</font><br><br2>
 
-Use as a performance reference for complex algorithms
-
-<i>Make decisions!</i>
-
-Communicate the basics of machine learning (accuracy, sensitivity, specificity) to non--experts
-
+<font size = 5>FFTrees will sometimes 'fail'. Spectacularly. But transparently</font>
 
 ]
 
-
-.pull-right5[
+.pull-right45[
 <br><br>
 ```{r}
 knitr::include_graphics("images/heart_fft_test.png")
@@ -909,28 +921,25 @@ knitr::include_graphics("images/heart_fft_test.png")
 ]
 
 
-
 ---
-
-
 class: title-slide-custom
 
 .pull-left65[
 
-<br><br><br>
+<br>
 
-## Create powerful, transparent decision aids with FFTrees
+# FFTrees
+### How to create extremely simple, transparent, predictive decision algorithms for both machine learning and clinical decision applications.
 
 <br>
 
-<font size = 6> Dr. Nathaniel D. Phillips<br><br3><a href="http://phcanalytics.roche.com/">PD PHC Data Science</a></font>
-<br><br3>
+<font size = 6> Dr. Nathaniel D. Phillips, Roche<br><br3></font>
 
-<font size = 5><i class="fa fa-tv"></i>   Slides: <a href='https://go.roche.com/BDE_FFTrees'>https://go.roche.com/BDE_FFTrees</a></font>
+<font size = 5><i class="fa fa-envelope"></i>  nathaniel.phillips@roche.com<br><br3></font>
+
+<font size = 5><i class="fa fa-tv"></i>   Slides: <a href='https://ndphillips.github.io/RMedicine_2018/'>https://ndphillips.github.io/RMedicine_2018</a></font>
 
 <br>
-
-<font size = 5>Roche, Basel Data Enthusiasts and Skeptics, 9 July, 2018</font>
 
 <br>
 ]
@@ -944,9 +953,37 @@ knitr::include_graphics("images/heartfft.png")
 
 ]
 
-
 ---
 # Backup Slides
+
+
+---
+.pull-left65[
+<br><br>
+><font size = 5> No matter how brilliant the tool, if it does not satisfy decision makers' <font color = 'blue'>practical needs</font>, they won't use it.</font>
+> <br><br>
+>
+><font size = 5>It is up to the designer to make the product understandable and useable by providing a good <font color = 'blue'>conceptual model that guides the user when things go wrong</font>.</font>
+> <br><br>
+><font size = 5>With a good conceptual model, people can diagnose and correct errors.</font>
+> <br><br>
+><font size = 5>Without a good model, when they encounter errors, they struggle, waste resources, get frustrated, and ultimately give up -- rendering your 'brilliant tool' worthless in the eye of the decision maker.</font>
+> <br><br>
+><font size = 5>Adapted (heavily) from "The Design of Everyday Things"</font>
+
+
+]
+
+.pull-right35[
+<br><br><br><br><br>
+
+```{r}
+knitr::include_graphics("images/norman_portrait.jpg")
+```
+<br>
+<font size = 5>Don Norman</font>
+
+]
 
 
 
@@ -1308,7 +1345,7 @@ knitr::include_graphics(c("images/iconarray_psa_harding.jpg"))
 <br><br>
 ## When will FFTs fail?
 
-It is not difficult to imagine datasets where FFTs will fail<br>
+It is not difficult to imagine data sets where FFTs will fail<br>
 
 FFTs will do poorly when...
 
@@ -1327,7 +1364,7 @@ FFTs will do well when...
 
 ### Prediction Simulation 
 
-Two simulated datasets (4 features each) one with a strong interaction, one without
+Two simulated data sets (4 features each) one with a strong interaction, one without
 
 ```{r, out.width = "100%", fig.align = 'center'}
 knitr::include_graphics("images/interaction_simulation.png")
@@ -1336,4 +1373,25 @@ knitr::include_graphics("images/interaction_simulation.png")
 Conclusion: CART is consistently better than FFTrees when there are strong interactions
 
 ]
+
+
+---
+.pull-left5[
+<br><br>
+
+## Make a Prediction!
+<br><br>
+<h3>Across 10 data sets, I am 90% confident FFTrees reached between <font color='gray'>HIGH</font> % and <font color='gray'>LOW</font> % of the accuracy of random forests</h2>
+
+]
+
+.pull-right45[
+
+```{r, out.width = "80%"}
+knitr::include_graphics("images/simulation_prediction_thermometer.png")
+```
+
+
+]
+
 
