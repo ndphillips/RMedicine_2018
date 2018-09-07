@@ -697,6 +697,8 @@ heart_cost_FFT <- FFTrees(diagnosis ~.,
 <font size = 5>Specify all cue costs as a named list</font>
 
 ```{r, eval = FALSE, echo = TRUE}
+# List of cue costs
+
 heart.cost <- list(thal = 102.9, 
                    sex = 1, 
                    ca = 100.9, ...)
@@ -705,7 +707,7 @@ heart.cost <- list(thal = 102.9,
 
 ```{r, echo = TRUE, eval = FALSE}
 FFTrees(diagnosis ~.,
-        cost.cues = heart.cost,
+        cost.cues = heart.cost,   # Include cue costs
         data = heart.train,
         data.test = heart.test,
         main = "Heart Disease")
@@ -740,7 +742,7 @@ plot(heart_cost_FFT, data = "test")
 ```{r, include = FALSE, eval = TRUE}
 heart_cost_FFT <- FFTrees(diagnosis ~.,
                           cost.cues = heart.cost,
-                          cost.outcomes = list(mi = 75, fa = 25),
+                          cost.outcomes = list(mi = 75, fa = 25), # <-
                           data = heart.train,
                           data.test = heart.test,
                           main = "Heart Disease")
@@ -769,6 +771,66 @@ plot(heart_cost_FFT, data = "test")
 ]
 
 
+
+---
+
+.pull-left6[
+
+<br><br>
+### I have a >2 class prediction problem
+
+```{r, out.width = "70%"}
+knitr::include_graphics("images/iris_data.jpeg")
+```
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+
+]
+
+
+
+
+
+
+---
+
+.pull-left6[
+
+
+
+<br><br>
+### I have a >2 class prediction problem
+
+```{r, out.width = "70%"}
+knitr::include_graphics("images/iris_data.jpeg")
+```
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+<br>
+# No.
+
+### Use rpart
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("rpart")
+```
+
+
+
+```{r, out.width = "100%"}
+knitr::include_graphics("images/rpart_image.png")
+```
+
+
+]
 
 
 ---
@@ -838,6 +900,12 @@ plot(heart_cost_FFT, data = "test")
 ```
 
 ]
+
+
+
+
+
+
 
 
 

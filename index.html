@@ -608,10 +608,10 @@ plot(heart_FFT, stats = FALSE)
 .pull-left6[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-### Those tests are very time consuming / expensive.
+### Those tests are very time consuming and expensive.
 &lt;br&gt;
 
-### It's worse to miss a case than to have a false-alarm
+### It's much worse to miss a case than to have a false-alarm
 
 &lt;br&gt;
 ### Can you account for these costs?
@@ -704,16 +704,71 @@ FFTrees(diagnosis ~.,
 
 
 
+---
+
+.pull-left6[
+
+&lt;br&gt;&lt;br&gt;
+### I have a &gt;2 class prediction problem
+
+&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+
+]
+
+
+
+
+
+
+---
+
+.pull-left6[
+
+
+
+&lt;br&gt;&lt;br&gt;
+### I have a &gt;2 class prediction problem
+
+&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+&lt;br&gt;
+# No.
+
+### Use rpart
+
+
+```r
+install.packages("rpart")
+```
+
+
+
+&lt;img src="images/rpart_image.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
 
 ---
 
 .pull-left6[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-## I have an idea for a tree
+### I have an idea for a tree
 &lt;br&gt;&lt;br&gt;
 
-## How would this one perform on our data?
+### How would this one perform on our data?
 
 ]
 
@@ -753,9 +808,18 @@ FFTrees(formula, data,
 .pull-right45[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
+
+
+
+
+
+
+
+
+
 
 
 
@@ -766,10 +830,10 @@ FFTrees(formula, data,
 
 
 &lt;br&gt;&lt;br&gt;
-## FFTs are nice for 'beginners'
+### FFTs are nice for exploration. But they can't be that predictive.
 
 &lt;br&gt;&lt;br&gt;
-## But how well can an FFT compete with more complex algorithms?
+### But how well can an FFT compete with more complex algorithms?
 
 ]
 
@@ -807,6 +871,7 @@ FFTrees(formula, data,
 &lt;br&gt;&lt;br&gt;
 
 &lt;font size = 5&gt;10 data sets in prediction simulation&lt;/font&gt;
+&lt;br&gt;
 
 | title| cases|features |base rate |
 |------:|----:|:-----|:----|
