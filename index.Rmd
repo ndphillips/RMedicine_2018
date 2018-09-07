@@ -321,8 +321,8 @@ knitr::include_graphics(c("images/terrorism_fft.png"))
 
 ---
 
+
 .pull-left4[
-<br><br><br>
 ## Benefits of FFTs
 
 <font size=5>Dead simple to communicate</font><br4>
@@ -335,7 +335,7 @@ knitr::include_graphics(c("images/terrorism_fft.png"))
 ]
 
 .pull-right55[
-<br><br>
+<br>
 
 ```{r, out.width = "100%"}
 knitr::include_graphics(c("images/fft_benefits.png"))
@@ -351,11 +351,8 @@ knitr::include_graphics(c("images/fft_benefits.png"))
 
 ## FFTrees R Package
 
-<br>
+<font size = 5>A simple, flexible tool for creating, customizing, visualizing, and implementing fast-and-frugal trees</font>
 
-<font size = 5>A simple tool for creating, customizing, visualizing, and implementing fast-and-frugal trees</font>
-
-<br>
 <font size = 5>v1.3.5 on CRAN (v1.4.0 on GitHub)</font>
 <br>
 
@@ -420,7 +417,7 @@ knitr::include_graphics("images/FFTrees_GitHub_ss.jpg")
 
 
 ---
-## Creating an FFTrees object with FFTrees()
+## Create an FFTrees object with FFTrees()
 
 
 Create an `FFTrees` object with `FFTrees()`
@@ -533,19 +530,30 @@ plot(heart_FFT, "test")
 ]
 
 
+
+---
+
+<br><br><br><br>
+
+
+
+# We have lots of questions...
+<br>
+## ~ Decision Makers
+
 ---
 
 .pull-left6[
 
 <br><br><br>
-## Why did the tree make those decisions?
-<br><br>
-## What happens if you tweak the tree's decisions??
+### Why did the tree make those decisions?
+<br>
+### What happens if you make 'minor' changes?
 
 ]
 
 .pull-right4[
-<br><br><br>
+<br><br><br><br>
 ```{r, out.width = "200%", fig.width = 7, fig.height = 6}
 plot(heart_FFT, "test")
 # knitr::include_graphics("images/heart_fft_test.png")
@@ -648,14 +656,18 @@ knitr::include_graphics("images/roc_tree_6.png")
 .pull-left6[
 
 <br><br><br>
-## Those tests are very time consuming / expensive.
-<br><br>
-## Can you account for the cost of tests?
+### Those tests are very time consuming and expensive.
+<br>
+
+### It's much worse to miss a case than to have a false-alarm
+
+<br>
+### Can you account for these costs?
 
 ]
 
 .pull-right4[
-<br><br><br>
+<br><br><br><br>
 ```{r, out.width = "200%", fig.width = 7, fig.height = 6}
 plot(heart_FFT, "test")
 # knitr::include_graphics("images/heart_fft_test.png")
@@ -764,10 +776,10 @@ plot(heart_cost_FFT, data = "test")
 .pull-left6[
 
 <br><br><br>
-## I have an idea for a tree
+### I have an idea for a tree
 <br><br>
 
-## How would this one perform on our data?
+### How would this one perform on our data?
 
 ]
 
@@ -814,7 +826,7 @@ FFTrees(formula, data,
 ```
 
 
-<font size = 5>As long as you specify a few simple rules, the result will be a 'legit' FFTrees object</font>
+<font size = 5>As long as you specify a few simple rules, the result will be a 'legit' FFTrees object you can then use for prediction.</font>
 
 ]
 
@@ -829,22 +841,25 @@ plot(heart_cost_FFT, data = "test")
 
 
 
+
+
+
 ---
 
 .pull-left6[
 
 
 
-<br>
-## FFTs are nice for 'beginners'
+<br><br>
+### FFTs are nice for exploration. But they can't be that predictive.
 
 <br><br>
-## But how well can an FFT compete with more complex algorithms?
+### But how well can an FFT compete with more complex algorithms?
 
 ]
 
 .pull-right4[
-<br><br><br><br>
+<br><br><br><br><br>
 ```{r, out.width = "100%"}
 knitr::include_graphics("images/fish.jpg")
 ```
@@ -872,13 +887,16 @@ knitr::include_graphics("images/ten_datasets.png")
 
 <font size = 5>100 50/50 Cross validation simulations</font>
 <br3>
-<font size = 5>Criterion: PredictionBalanced Accuracy</font>
+<font size = 5>Criterion: Prediction Balanced Accuracy: mean(Sensitivity, Specificity)</font>
 <br3>
 
 ]
 
-.pull-right5[
+.pull-right45[
 <br><br>
+
+<font size = 5>10 data sets in prediction simulation</font>
+<br>
 
 | title| cases|features |base rate |
 |------:|----:|:-----|:----|
@@ -893,6 +911,7 @@ knitr::include_graphics("images/ten_datasets.png")
 |     voting|   435     |17    |0.61 |
 |     yeast|   1,484     |19    |0.16 |
 
+Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.html)
 
 ]
 
@@ -930,37 +949,17 @@ knitr::include_graphics("images/FFTrees_simulation_performance_A.png")
 
 [Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
 
+
 ---
 
-.pull-left55[
-<br><br>
-## What is FFTrees?
-
-<br2>
-
-<font size = 5>A flexible, interactive tool to create simple, effective, lost-cost decision aids</font><br><br2>
+## Slow vs. Fast Worlds
 
 
-<font size = 5>Try it out, see what insights it provides.</font>
-
-<br>
-
-## What is it not?
-<br3>
-<font size = 5>A free lunch.</font><br><br2>
-
-<font size = 5>FFTrees will sometimes 'fail'. Spectacularly. But transparently</font>
-
-]
-
-.pull-right45[
-<br><br>
-```{r}
-knitr::include_graphics("images/heart_fft_test.png")
+```{r, out.width = "90%"}
+knitr::include_graphics("images/slow_vs_fast_world.png")
 ```
 
-]
-
+When simple models have high accuracy, and complexity carries costs (Financial, comprehension, error diagnosis), simple models may be optimal.
 
 ---
 class: title-slide-custom
@@ -997,6 +996,39 @@ knitr::include_graphics("images/heartfft.png")
 ---
 # Backup Slides
 
+
+
+
+---
+
+.pull-left55[
+<br><br>
+## What is FFTrees?
+
+<br2>
+
+<font size = 5>A flexible, interactive tool to create simple, effective, lost-cost decision aids</font><br><br2>
+
+
+<font size = 5>Try it out, see what insights it provides.</font>
+
+<br>
+
+## What is it not?
+<br3>
+<font size = 5>A free lunch.</font><br><br2>
+
+<font size = 5>FFTrees will sometimes 'fail'. Spectacularly. But transparently</font>
+
+]
+
+.pull-right45[
+<br><br>
+```{r}
+knitr::include_graphics("images/heart_fft_test.png")
+```
+
+]
 
 ---
 .pull-left65[

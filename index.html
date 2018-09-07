@@ -260,8 +260,8 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 
 ---
 
+
 .pull-left4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
 ## Benefits of FFTs
 
 &lt;font size=5&gt;Dead simple to communicate&lt;/font&gt;&lt;br4&gt;
@@ -274,7 +274,7 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 ]
 
 .pull-right55[
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
 &lt;img src="images/fft_benefits.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -288,11 +288,8 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 
 ## FFTrees R Package
 
-&lt;br&gt;
+&lt;font size = 5&gt;A simple, flexible tool for creating, customizing, visualizing, and implementing fast-and-frugal trees&lt;/font&gt;
 
-&lt;font size = 5&gt;A simple tool for creating, customizing, visualizing, and implementing fast-and-frugal trees&lt;/font&gt;
-
-&lt;br&gt;
 &lt;font size = 5&gt;v1.3.5 on CRAN (v1.4.0 on GitHub)&lt;/font&gt;
 &lt;br&gt;
 
@@ -353,7 +350,7 @@ library(FFTrees)
 
 
 ---
-## Creating an FFTrees object with FFTrees()
+## Create an FFTrees object with FFTrees()
 
 
 Create an `FFTrees` object with `FFTrees()`
@@ -500,19 +497,30 @@ plot(heart_FFT, stats = FALSE)
 ]
 
 
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+
+
+# We have lots of questions...
+&lt;br&gt;
+## ~ Decision Makers
+
 ---
 
 .pull-left6[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-## Why did the tree make those decisions?
-&lt;br&gt;&lt;br&gt;
-## What happens if you tweak the tree's decisions??
+### Why did the tree make those decisions?
+&lt;br&gt;
+### What happens if you make 'minor' changes?
 
 ]
 
 .pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" width="200%" style="display: block; margin: auto;" /&gt;
 
 ]
@@ -600,14 +608,18 @@ plot(heart_FFT, stats = FALSE)
 .pull-left6[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-## Those tests are very time consuming / expensive.
-&lt;br&gt;&lt;br&gt;
-## Can you account for the cost of tests?
+### Those tests are very time consuming / expensive.
+&lt;br&gt;
+
+### It's worse to miss a case than to have a false-alarm
+
+&lt;br&gt;
+### Can you account for these costs?
 
 ]
 
 .pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="200%" style="display: block; margin: auto;" /&gt;
 
 ]
@@ -734,7 +746,7 @@ FFTrees(formula, data,
 ```
 
 
-&lt;font size = 5&gt;As long as you specify a few simple rules, the result will be a 'legit' FFTrees object&lt;/font&gt;
+&lt;font size = 5&gt;As long as you specify a few simple rules, the result will be a 'legit' FFTrees object you can then use for prediction.&lt;/font&gt;
 
 ]
 
@@ -753,7 +765,7 @@ FFTrees(formula, data,
 
 
 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 ## FFTs are nice for 'beginners'
 
 &lt;br&gt;&lt;br&gt;
@@ -762,7 +774,7 @@ FFTrees(formula, data,
 ]
 
 .pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="images/fish.jpg" width="100%" style="display: block; margin: auto;" /&gt;
 
 ]
@@ -786,13 +798,15 @@ FFTrees(formula, data,
 
 &lt;font size = 5&gt;100 50/50 Cross validation simulations&lt;/font&gt;
 &lt;br3&gt;
-&lt;font size = 5&gt;Criterion: PredictionBalanced Accuracy&lt;/font&gt;
+&lt;font size = 5&gt;Criterion: Prediction Balanced Accuracy: mean(Sensitivity, Specificity)&lt;/font&gt;
 &lt;br3&gt;
 
 ]
 
-.pull-right5[
+.pull-right45[
 &lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;10 data sets in prediction simulation&lt;/font&gt;
 
 | title| cases|features |base rate |
 |------:|----:|:-----|:----|
@@ -807,6 +821,7 @@ FFTrees(formula, data,
 |     voting|   435     |17    |0.61 |
 |     yeast|   1,484     |19    |0.16 |
 
+Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.html)
 
 ]
 
@@ -838,35 +853,15 @@ FFTrees(formula, data,
 
 [Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
 
+
 ---
 
-.pull-left55[
-&lt;br&gt;&lt;br&gt;
-## What is FFTrees?
-
-&lt;br2&gt;
-
-&lt;font size = 5&gt;A flexible, interactive tool to create simple, effective, lost-cost decision aids&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
+## Slow vs. Fast Worlds
 
 
-&lt;font size = 5&gt;Try it out, see what insights it provides.&lt;/font&gt;
+&lt;img src="images/slow_vs_fast_world.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-&lt;br&gt;
-
-## What is it not?
-&lt;br3&gt;
-&lt;font size = 5&gt;A free lunch.&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
-
-&lt;font size = 5&gt;FFTrees will sometimes 'fail'. Spectacularly. But transparently&lt;/font&gt;
-
-]
-
-.pull-right45[
-&lt;br&gt;&lt;br&gt;
-&lt;img src="images/heart_fft_test.png" style="display: block; margin: auto;" /&gt;
-
-]
-
+When simple models have high accuracy, and complexity carries costs (Financial, comprehension, error diagnosis), simple models may be optimal.
 
 ---
 class: title-slide-custom
@@ -901,6 +896,37 @@ class: title-slide-custom
 ---
 # Backup Slides
 
+
+
+
+---
+
+.pull-left55[
+&lt;br&gt;&lt;br&gt;
+## What is FFTrees?
+
+&lt;br2&gt;
+
+&lt;font size = 5&gt;A flexible, interactive tool to create simple, effective, lost-cost decision aids&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
+
+
+&lt;font size = 5&gt;Try it out, see what insights it provides.&lt;/font&gt;
+
+&lt;br&gt;
+
+## What is it not?
+&lt;br3&gt;
+&lt;font size = 5&gt;A free lunch.&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
+
+&lt;font size = 5&gt;FFTrees will sometimes 'fail'. Spectacularly. But transparently&lt;/font&gt;
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heart_fft_test.png" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 .pull-left65[
