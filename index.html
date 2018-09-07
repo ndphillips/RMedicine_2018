@@ -53,7 +53,7 @@ class: title-slide-custom
 
 &lt;font size = 5&gt;&lt;i class="fa fa-envelope"&gt;&lt;/i&gt;  nathaniel.phillips@roche.com&lt;br&gt;&lt;br3&gt;&lt;/font&gt;
 
-&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://ndphillips.github.io/RMedicine_2018/'&gt;https://ndphillips.github.io/RMedicine_2018&lt;/a&gt;&lt;/font&gt;
+&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://ndphillips.github.io/RMedicine_2018/'&gt;ndphillips.github.io/RMedicine_2018&lt;/a&gt;&lt;/font&gt;
 
 &lt;br&gt;
 
@@ -197,6 +197,29 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 ]
 
 
+---
+
+
+.pull-left4[
+&lt;br&gt;
+## Benefits of FFTs
+
+&lt;font size=5&gt;Dead simple to communicate&lt;/font&gt;&lt;br4&gt;
+&lt;font size=5&gt;Can be implemented 'in the head'&lt;/font&gt;&lt;br4&gt;
+&lt;font size=5&gt;Compare to (and incorporate) expert knowledge&lt;/font&gt;&lt;br4&gt;
+&lt;font size=5&gt;Focus on a few critical pieces of information&lt;/font&gt;&lt;br4&gt;
+&lt;font size=5&gt;Low risk of overfitting - no false sense of magical abilities&lt;/font&gt;&lt;br4&gt;
+&lt;font size=5&gt;Communicate errors. Transparently.&lt;/font&gt;&lt;br4&gt;
+
+]
+
+.pull-right55[
+&lt;br&gt;
+
+&lt;img src="images/fft_benefits.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ---
 
@@ -257,29 +280,6 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 
 ]
 
-
----
-
-
-.pull-left4[
-&lt;br&gt;
-## Benefits of FFTs
-
-&lt;font size=5&gt;Dead simple to communicate&lt;/font&gt;&lt;br4&gt;
-&lt;font size=5&gt;Can be implemented 'in the head'&lt;/font&gt;&lt;br4&gt;
-&lt;font size=5&gt;Compare to (and incorporate) expert knowledge&lt;/font&gt;&lt;br4&gt;
-&lt;font size=5&gt;Focus on a few critical pieces of information&lt;/font&gt;&lt;br4&gt;
-&lt;font size=5&gt;Low risk of overfitting - no false sense of magical abilities&lt;/font&gt;&lt;br4&gt;
-&lt;font size=5&gt;Communicate errors. Transparently.&lt;/font&gt;&lt;br4&gt;
-
-]
-
-.pull-right55[
-&lt;br&gt;
-
-&lt;img src="images/fft_benefits.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
 
 ---
 
@@ -486,10 +486,6 @@ plot(heart_FFT, data = "test")
 
 &lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-```r
-# knitr::include_graphics("images/heart_fft_test.png")
-```
-
 ]
 
 .pull-right3[
@@ -537,517 +533,6 @@ ok, shoot.
 .pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="200%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-.pull-left55[
-
-
-
-```r
-plot(heart_FFT, data = "test") # tree = 1
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-.pull-right4[
-
-&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
-&lt;br&gt;&lt;br&gt;
-
-&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
-&lt;br&gt;
-
-&lt;img src="images/roc_tree_1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-
-
----
-
-.pull-left55[
-
-
-
-```r
-plot(heart_FFT, data = "test", tree = 7)
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-.pull-right4[
-
-&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
-&lt;br&gt;&lt;br&gt;
-
-&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
-&lt;br&gt;
-
-&lt;img src="images/roc_tree_7b.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
----
-
-.pull-left55[
-
-
-
-```r
-plot(heart_FFT, data = "test", tree = 6)
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-.pull-right4[
-
-&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
-&lt;br&gt;&lt;br&gt;
-
-&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
-&lt;br&gt;
-
-&lt;img src="images/roc_tree_6.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-
----
-
-.pull-left6[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-### Those tests are very time consuming and expensive.
-&lt;br&gt;
-
-### It's also much worse to miss a case than to have a false-alarm
-
-&lt;br&gt;
-### Can you account for these costs?
-
-]
-
-.pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" width="200%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-.pull-left55[
-&lt;br&gt;&lt;br&gt;
-## Cue costs
-
-&lt;font size = 5&gt;Create a list of costs&lt;/font&gt;
-
-
-
-
-
-
-```r
-# List of cue costs
-heart.cost &lt;- list(thal = 102.9, 
-                 sex = 1, 
-                 ca = 100.9) 
-                # ...)
-```
-
-&lt;font size = 5&gt;Pass costs to cost.cues argument&lt;/font&gt;
-
-
-
-```r
-FFTrees(diagnosis ~.,
-        cost.cues = heart.cost,  # cue costs
-        data = heart.train,
-        data.test = heart.test,
-        main = "Heart Disease")
-```
-
-&lt;font size = 5&gt;The tree now excludes the most expensive tests&lt;/font&gt;
-
-
-]
-
-.pull-right45[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-.pull-left55[
-&lt;br&gt;
-## Include outcome costs
-
-&lt;font size = 5&gt;Specify the costs of decision outcomes with cost.outcomes&lt;/font&gt;
-
-- hi (Hits) = $0
-- mi (Misses) = $75
-- fa (False Alarms) = $25
-- cr (Correct Rejections) = $0
-
-
-
-
-
-```r
-FFTrees(diagnosis ~.,
-        cost.cues = heart.cost,
-        cost.outcomes = list(mi = 75, fa = 25), # &lt;-
-        data = heart.train,
-        data.test = heart.test,
-        main = "Heart Disease")
-```
-
-&lt;font size = 5&gt;The tree now tries to minimize both outcome &lt;i&gt;and&lt;/i&gt; cue cost&lt;/font&gt;
-
-]
-
-.pull-right45[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-
-
----
-
-.pull-left6[
-
-&lt;br&gt;&lt;br&gt;
-### I have a &gt;2 class prediction problem
-
-&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
-
-### Can FFTrees handle this?
-
-]
-
-.pull-right4[
-
-]
-
-
-
-
-
-
----
-
-.pull-left6[
-
-
-
-&lt;br&gt;&lt;br&gt;
-### I have a 3 class prediction problem
-
-&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
-
-### Can FFTrees handle this?
-
-]
-
-.pull-right4[
-&lt;br&gt;
-# No.
-
-### Use rpart
-
-
-```r
-install.packages("rpart")
-```
-
-
-
-&lt;img src="images/rpart_image.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-]
-
-
----
-
-.pull-left6[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-### I have an idea for a tree
-&lt;br&gt;&lt;br&gt;
-
-### How would this one perform on our data?
-
-]
-
-.pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="images/custom_heart_fft.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
-
----
-
-.pull-left55[
-
-## Create "my tree"
-
-
-
-&lt;br&gt;
-&lt;font size = 5&gt;Specify a custom FFT in words using the my.tree argument&lt;/font&gt;
-
-
-
-```r
-# Specify an FFT in words
-ihaka_fft &lt;- "If age &gt; 55, predict True.
-              If cp != {a}, predict False.
-              If chol &gt; 300, predict False."
-
-# Include as my.tree
-FFTrees(formula, data,
-        my.tree = ihaka_fft,    # Specify my.tree
-        main = "My Custom FFT")
-```
-
-
-&lt;font size = 5&gt;As long as you specify a few simple rules, the result will be a 'legit' FFTrees object you can then use for prediction.&lt;/font&gt;
-
-]
-
-.pull-right45[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-.pull-left6[
-
-
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-### FFTs are nice for non--expert data scientists. But they can't be that predictive.
-
-&lt;br&gt;&lt;br&gt;
-### But how well can an FFT compete with more complex algorithms?
-
-]
-
-.pull-right4[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="images/fish.jpg" width="100%" style="display: block; margin: auto;" /&gt;
-FFTrees vs. Random Forests / GBM / SVM (?)
-
-
-]
-
-
----
-
-.pull-left5[
-
-## Prediction Simulation
-
-&lt;img src="images/ten_datasets.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-&lt;br&gt;
-
-
-&lt;font size = 5&gt;10 data sets from the UCI ML repository&lt;/font&gt;&lt;br3&gt;
-
-&lt;font size = 5&gt;FFTrees v CART v Regression v. Random Forests v. Support Vector Machines (...)&lt;/font&gt;
-&lt;br3&gt;
-
-&lt;font size = 5&gt;100 50/50 Cross validation simulations&lt;/font&gt;
-&lt;br3&gt;
-&lt;font size = 5&gt;Criterion: Prediction Balanced Accuracy: mean(Sensitivity, Specificity)&lt;/font&gt;
-&lt;br3&gt;
-
-]
-
-.pull-right45[
-&lt;br&gt;&lt;br&gt;
-
-&lt;font size = 5&gt;10 data sets in prediction simulation&lt;/font&gt;
-&lt;br&gt;
-
-| title| cases|features |base rate |
-|------:|----:|:-----|:----|
-|     arrhythmia|    68|280     |0.29    |
-|     audiology|    226|70     |0.10    |
-|     breast|    683|10     |0.35    |
-|     cmc|    1,473|10    |0.35    |
-|     credit|    666|16     |0.45    |
-|     dermatology|   358|35     |0.31    |
-|     heart|   303     |14    |0.46
-|     occupancy|   17,895|6     |0.21    |
-|     voting|   435     |17    |0.61 |
-|     yeast|   1,484     |19    |0.16 |
-
-Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.html)
-
-]
-
----
-## Prediction Simulation
-
-&lt;br&gt;
-
-&lt;img src="images/FFTrees_simulation_performance_blank.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
-
----
-## Prediction Simulation
-
-&lt;br&gt;
-
-&lt;img src="images/FFTrees_simulation_performance.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
-
-
----
-## Prediction Simulation
-
-&lt;br&gt;
-
-&lt;img src="images/FFTrees_simulation_performance_A.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
-
-
----
-
-## Slow vs. Fast Worlds
-
-
-&lt;img src="images/slow_vs_fast_world.png" width="90%" style="display: block; margin: auto;" /&gt;
-
-When simple models have high accuracy, and complexity carries costs (Financial, comprehension, error diagnosis), simple models may be optimal.
-
----
-class: title-slide-custom
-
-.pull-left65[
-
-&lt;br&gt;
-
-# FFTrees
-### How to create extremely simple, transparent, predictive decision algorithms for both machine learning and clinical decision applications.
-
-&lt;br&gt;
-
-&lt;font size = 6&gt; Dr. Nathaniel D. Phillips, Roche&lt;br&gt;&lt;br3&gt;&lt;/font&gt;
-
-&lt;font size = 5&gt;&lt;i class="fa fa-envelope"&gt;&lt;/i&gt;  nathaniel.phillips@roche.com&lt;br&gt;&lt;br3&gt;&lt;/font&gt;
-
-&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://ndphillips.github.io/RMedicine_2018/'&gt;https://ndphillips.github.io/RMedicine_2018&lt;/a&gt;&lt;/font&gt;
-
-&lt;br&gt;
-
-&lt;br&gt;
-]
-
-.pull-right35[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="images/heartfft.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-# Backup Slides
-
-
-
-
----
-
-.pull-left55[
-&lt;br&gt;&lt;br&gt;
-## What is FFTrees?
-
-&lt;br2&gt;
-
-&lt;font size = 5&gt;A flexible, interactive tool to create simple, effective, lost-cost decision aids&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
-
-
-&lt;font size = 5&gt;Try it out, see what insights it provides.&lt;/font&gt;
-
-&lt;br&gt;
-
-## What is it not?
-&lt;br3&gt;
-&lt;font size = 5&gt;A free lunch.&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
-
-&lt;font size = 5&gt;FFTrees will sometimes 'fail'. Spectacularly. But transparently&lt;/font&gt;
-
-]
-
-.pull-right45[
-&lt;br&gt;&lt;br&gt;
-&lt;img src="images/heart_fft_test.png" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-.pull-left65[
-&lt;br&gt;&lt;br&gt;
-&gt;&lt;font size = 5&gt; No matter how brilliant the tool, if it does not satisfy decision makers' &lt;font color = 'blue'&gt;practical needs&lt;/font&gt;, they won't use it.&lt;/font&gt;
-&gt; &lt;br&gt;&lt;br&gt;
-&gt;
-&gt;&lt;font size = 5&gt;It is up to the designer to make the product understandable and useable by providing a good &lt;font color = 'blue'&gt;conceptual model that guides the user when things go wrong&lt;/font&gt;.&lt;/font&gt;
-&gt; &lt;br&gt;&lt;br&gt;
-&gt;&lt;font size = 5&gt;With a good conceptual model, people can diagnose and correct errors.&lt;/font&gt;
-&gt; &lt;br&gt;&lt;br&gt;
-&gt;&lt;font size = 5&gt;Without a good model, when they encounter errors, they struggle, waste resources, get frustrated, and ultimately give up -- rendering your 'brilliant tool' worthless in the eye of the decision maker.&lt;/font&gt;
-&gt; &lt;br&gt;&lt;br&gt;
-&gt;&lt;font size = 5&gt;Adapted (heavily) from "The Design of Everyday Things"&lt;/font&gt;
-
-
-]
-
-.pull-right35[
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;img src="images/norman_portrait.jpg" width="256" style="display: block; margin: auto;" /&gt;
-&lt;br&gt;
-&lt;font size = 5&gt;Don Norman&lt;/font&gt;
 
 ]
 
@@ -1276,7 +761,519 @@ count: false
 
 
 
+---
 
+.pull-left55[
+
+
+
+```r
+plot(heart_FFT, data = "test") # tree = 1
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right4[
+
+&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
+&lt;br&gt;
+
+&lt;img src="images/roc_tree_1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+
+.pull-left55[
+
+
+
+```r
+plot(heart_FFT, data = "test", tree = 7)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right4[
+
+&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
+&lt;br&gt;
+
+&lt;img src="images/roc_tree_7b.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+---
+
+.pull-left55[
+
+
+
+```r
+plot(heart_FFT, data = "test", tree = 6)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.pull-right4[
+
+&lt;font size = 5&gt;FFTrees objects contain many FFTs spanning ROC space.&lt;/font&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;Use the tree = X argument to explore different trees&lt;/font&gt;
+&lt;br&gt;
+
+&lt;img src="images/roc_tree_6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+.pull-left6[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### Those tests are very time consuming and expensive.
+&lt;br&gt;
+
+### It's also much worse to miss a case than to have a false-alarm
+
+&lt;br&gt;
+### Can you account for these costs?
+
+]
+
+.pull-right4[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" width="200%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left55[
+&lt;br&gt;&lt;br&gt;
+## Cue costs
+
+&lt;font size = 5&gt;Create a list of costs&lt;/font&gt;
+
+
+
+
+
+
+```r
+# List of cue costs
+heart.cost &lt;- list(thal = 102.9, 
+                   sex = 1, 
+                   ca = 100.9) 
+                   # ...)
+```
+
+&lt;font size = 5&gt;Pass costs to cost.cues argument&lt;/font&gt;
+
+
+
+```r
+FFTrees(diagnosis ~.,
+        cost.cues = heart.cost,  # cue costs
+        data = heart.train,
+        data.test = heart.test,
+        main = "Heart Disease")
+```
+
+&lt;font size = 5&gt;The tree now excludes the most expensive tests&lt;/font&gt;
+
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-50-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left55[
+&lt;br&gt;
+## Include outcome costs
+
+&lt;font size = 5&gt;Specify the costs of decision outcomes with cost.outcomes&lt;/font&gt;
+
+- hi (Hits) = $0
+- mi (Misses) = $75
+- fa (False Alarms) = $25
+- cr (Correct Rejections) = $0
+
+
+
+
+
+```r
+FFTrees(diagnosis ~.,
+        cost.cues = heart.cost,
+        cost.outcomes = list(mi = 75, fa = 25), # &lt;-
+        data = heart.train,
+        data.test = heart.test,
+        main = "Heart Disease")
+```
+
+&lt;font size = 5&gt;The tree now tries to minimize both outcome &lt;i&gt;and&lt;/i&gt; cue cost&lt;/font&gt;
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
+.pull-left6[
+
+&lt;br&gt;&lt;br&gt;
+### I have a 3+ class prediction problem
+
+&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+
+]
+
+
+
+
+
+
+---
+
+.pull-left6[
+
+
+
+&lt;br&gt;&lt;br&gt;
+### I have a 3+ class prediction problem
+
+&lt;img src="images/iris_data.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+
+### Can FFTrees handle this?
+
+]
+
+.pull-right4[
+&lt;br&gt;
+# No.
+
+### Use rpart
+
+
+```r
+install.packages("rpart")
+```
+
+
+
+&lt;img src="images/rpart_image.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+.pull-left6[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### I have an idea for a tree
+&lt;br&gt;&lt;br&gt;
+
+### How would this one perform on our data?
+
+]
+
+.pull-right4[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/custom_heart_fft.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+.pull-left55[
+
+## Create "my tree"
+
+
+
+&lt;br&gt;
+&lt;font size = 5&gt;Specify a custom FFT in words using the my.tree argument&lt;/font&gt;
+
+
+
+```r
+# Specify an FFT in words
+ihaka_fft &lt;- "If age &gt; 55, predict True.
+              If cp != {a}, predict False.
+              If chol &gt; 300, predict False."
+```
+
+&lt;font size = 5&gt;As long as you specify a few simple rules, the result will be a 'legit' FFTrees object you can then use for prediction.&lt;/font&gt;
+
+
+```r
+# Include as my.tree
+FFTrees(formula, data,
+        my.tree = ihaka_fft,    # Specify my.tree
+        main = "Ihaka FFT")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-62-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+.pull-left6[
+
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+### FFTs are nice for non--expert data scientists. But they can't be that predictive.
+
+&lt;br&gt;&lt;br&gt;
+### But how well can an FFT compete with more complex algorithms?
+
+]
+
+.pull-right4[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/fish.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+FFTrees vs. Random Forests / GBM / SVM (?)
+
+
+]
+
+
+---
+
+.pull-left5[
+
+## Prediction Simulation
+
+&lt;img src="images/ten_datasets.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+
+
+&lt;font size = 5&gt;10 data sets from the UCI ML repository&lt;/font&gt;&lt;br3&gt;
+
+&lt;font size = 5&gt;FFTrees v CART v Regression v. Random Forests v. Support Vector Machines (...)&lt;/font&gt;
+&lt;br3&gt;
+
+&lt;font size = 5&gt;100 50/50 Cross validation simulations&lt;/font&gt;
+&lt;br3&gt;
+&lt;font size = 5&gt;Criterion: Prediction Balanced Accuracy: mean(Sensitivity, Specificity)&lt;/font&gt;
+&lt;br3&gt;
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;
+
+&lt;font size = 5&gt;10 data sets in prediction simulation&lt;/font&gt;
+&lt;br&gt;
+
+| title| cases|features |base rate |
+|------:|----:|:-----|:----|
+|     arrhythmia|    68|280     |0.29    |
+|     audiology|    226|70     |0.10    |
+|     breast|    683|10     |0.35    |
+|     cmc|    1,473|10    |0.35    |
+|     credit|    666|16     |0.45    |
+|     dermatology|   358|35     |0.31    |
+|     heart|   303     |14    |0.46
+|     occupancy|   17,895|6     |0.21    |
+|     voting|   435     |17    |0.61 |
+|     yeast|   1,484     |19    |0.16 |
+
+Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.html)
+
+]
+
+---
+## Prediction Simulation
+
+&lt;br&gt;
+
+&lt;img src="images/FFTrees_simulation_performance_blank.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
+
+---
+## Prediction Simulation
+
+&lt;br&gt;
+
+&lt;img src="images/FFTrees_simulation_performance.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
+
+
+---
+## Prediction Simulation
+
+&lt;br&gt;
+
+&lt;img src="images/FFTrees_simulation_performance_A.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+[Phillips et al. (2017).](http://journal.sjdm.org/17/17217/jdm17217.pdf) FFTrees: A toolbox to create [...]. Judgment and Decision Making. 12(4).
+
+
+---
+
+## Slow vs. Fast Worlds
+
+
+&lt;img src="images/slow_vs_fast_world.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+When simple models have high accuracy, and complexity carries costs (Financial, comprehension, error diagnosis), simple models may be optimal.
+
+---
+class: title-slide-custom
+
+.pull-left65[
+
+&lt;br&gt;
+
+# FFTrees
+### How to create extremely simple, transparent, predictive decision algorithms for both machine learning and clinical decision applications.
+
+&lt;br&gt;
+
+&lt;font size = 6&gt; Dr. Nathaniel D. Phillips, Roche&lt;br&gt;&lt;br3&gt;&lt;/font&gt;
+
+&lt;font size = 5&gt;&lt;i class="fa fa-envelope"&gt;&lt;/i&gt;  nathaniel.phillips@roche.com&lt;br&gt;&lt;br3&gt;&lt;/font&gt;
+
+&lt;font size = 5&gt;&lt;i class="fa fa-tv"&gt;&lt;/i&gt;   Slides: &lt;a href='https://ndphillips.github.io/RMedicine_2018/'&gt;ndphillips.github.io/RMedicine_2018&lt;/a&gt;&lt;/font&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+]
+
+.pull-right35[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heartfft.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+# Backup Slides
+
+
+
+
+---
+
+.pull-left55[
+&lt;br&gt;&lt;br&gt;
+## What is FFTrees?
+
+&lt;br2&gt;
+
+&lt;font size = 5&gt;A flexible, interactive tool to create simple, effective, lost-cost decision aids&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
+
+
+&lt;font size = 5&gt;Try it out, see what insights it provides.&lt;/font&gt;
+
+&lt;br&gt;
+
+## What is it not?
+&lt;br3&gt;
+&lt;font size = 5&gt;A free lunch.&lt;/font&gt;&lt;br&gt;&lt;br2&gt;
+
+&lt;font size = 5&gt;FFTrees will sometimes 'fail'. Spectacularly. But transparently&lt;/font&gt;
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="images/heart_fft_test.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left65[
+&lt;br&gt;&lt;br&gt;
+&gt;&lt;font size = 5&gt; No matter how brilliant the tool, if it does not satisfy decision makers' &lt;font color = 'blue'&gt;practical needs&lt;/font&gt;, they won't use it.&lt;/font&gt;
+&gt; &lt;br&gt;&lt;br&gt;
+&gt;
+&gt;&lt;font size = 5&gt;It is up to the designer to make the product understandable and useable by providing a good &lt;font color = 'blue'&gt;conceptual model that guides the user when things go wrong&lt;/font&gt;.&lt;/font&gt;
+&gt; &lt;br&gt;&lt;br&gt;
+&gt;&lt;font size = 5&gt;With a good conceptual model, people can diagnose and correct errors.&lt;/font&gt;
+&gt; &lt;br&gt;&lt;br&gt;
+&gt;&lt;font size = 5&gt;Without a good model, when they encounter errors, they struggle, waste resources, get frustrated, and ultimately give up -- rendering your 'brilliant tool' worthless in the eye of the decision maker.&lt;/font&gt;
+&gt; &lt;br&gt;&lt;br&gt;
+&gt;&lt;font size = 5&gt;Adapted (heavily) from "The Design of Everyday Things"&lt;/font&gt;
+
+
+]
+
+.pull-right35[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="images/norman_portrait.jpg" width="256" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
+&lt;font size = 5&gt;Don Norman&lt;/font&gt;
+
+]
 
 
 ---
