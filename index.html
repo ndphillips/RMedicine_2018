@@ -262,6 +262,7 @@ Green &amp; Mehr. (1997). What alters physician's decisions to admit to the coro
 
 
 .pull-left4[
+&lt;br&gt;
 ## Benefits of FFTs
 
 &lt;font size=5&gt;Dead simple to communicate&lt;/font&gt;&lt;br4&gt;
@@ -302,8 +303,6 @@ install.packages("FFTrees")
 # Load FFTrees
 library(FFTrees)
 ```
-
-
 
 
 ]
@@ -445,7 +444,7 @@ plot(heart_FFT, stats = FALSE)
 plot(heart_FFT)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ```r
 # knitr::include_graphics("images/heart_fft_test.png")
@@ -485,7 +484,7 @@ plot(heart_FFT)
 plot(heart_FFT, data = "test")
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ```r
 # knitr::include_graphics("images/heart_fft_test.png")
@@ -528,16 +527,16 @@ ok, shoot.
 
 .pull-left6[
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 ### Why did the tree make those decisions?
 &lt;br&gt;
-### How it compares to other similar trees?
+### How would other similar trees perform?
 
 ]
 
 .pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" width="200%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="200%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -548,10 +547,10 @@ ok, shoot.
 
 
 ```r
-plot(heart_FFT, data = "test")
+plot(heart_FFT, data = "test") # tree = 1
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -581,7 +580,7 @@ plot(heart_FFT, data = "test")
 plot(heart_FFT, data = "test", tree = 7)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -609,7 +608,7 @@ plot(heart_FFT, data = "test", tree = 7)
 plot(heart_FFT, data = "test", tree = 6)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -636,7 +635,7 @@ plot(heart_FFT, data = "test", tree = 6)
 ### Those tests are very time consuming and expensive.
 &lt;br&gt;
 
-### It's much worse to miss a case than to have a false-alarm
+### It's also much worse to miss a case than to have a false-alarm
 
 &lt;br&gt;
 ### Can you account for these costs?
@@ -645,7 +644,7 @@ plot(heart_FFT, data = "test", tree = 6)
 
 .pull-right4[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="200%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" width="200%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -655,22 +654,22 @@ plot(heart_FFT, data = "test", tree = 6)
 &lt;br&gt;&lt;br&gt;
 ## Cue costs
 
-&lt;font size = 5&gt;Specify the costs of cues with cost.cues&lt;/font&gt;
-&lt;br&gt;
+&lt;font size = 5&gt;Create a list of costs&lt;/font&gt;
 
 
 
-&lt;br&gt;
-&lt;font size = 5&gt;Specify all cue costs as a named list&lt;/font&gt;
+
 
 
 ```r
 # List of cue costs
-
 heart.cost &lt;- list(thal = 102.9, 
-                   sex = 1, 
-                   ca = 100.9, ...)
+                 sex = 1, 
+                 ca = 100.9) 
+                # ...)
 ```
+
+&lt;font size = 5&gt;Pass costs to cost.cues argument&lt;/font&gt;
 
 
 
@@ -689,7 +688,7 @@ FFTrees(diagnosis ~.,
 
 .pull-right45[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -725,7 +724,7 @@ FFTrees(diagnosis ~.,
 
 .pull-right45[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-47-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -839,7 +838,7 @@ FFTrees(formula, data,
 .pull-right45[
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="index_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-54-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 

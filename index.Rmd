@@ -323,6 +323,7 @@ knitr::include_graphics(c("images/terrorism_fft.png"))
 
 
 .pull-left4[
+<br>
 ## Benefits of FFTs
 
 <font size=5>Dead simple to communicate</font><br4>
@@ -362,11 +363,6 @@ install.packages("FFTrees")
 # devtools::install_github("ndphillips/FFTrees")
 
 # Load FFTrees
-library(FFTrees)
-```
-
-```{r, include = FALSE}
-# Step 1: Load FFTrees
 library(FFTrees)
 ```
 
@@ -543,10 +539,10 @@ ok, shoot.
 
 .pull-left6[
 
-<br><br><br>
+<br><br><br><br>
 ### Why did the tree make those decisions?
 <br>
-### How it compares to other similar trees?
+### How would other similar trees perform?
 
 ]
 
@@ -565,7 +561,7 @@ plot(heart_FFT, "test")
 
 
 ```{r, echo = TRUE, fig.width = 7, fig.height = 7, out.width = "80%"}
-plot(heart_FFT, data = "test")
+plot(heart_FFT, data = "test") # tree = 1
 ```
 
 
@@ -674,28 +670,29 @@ plot(heart_FFT, "test")
 ## Cue costs
 
 <font size = 5>Create a list of costs</font>
-<br>
+
 
 ```{r, include = FALSE, eval = TRUE}
+
 heart_cost_FFT <- FFTrees(diagnosis ~.,
                           cost.cues = heart.cost,
                           data = heart.train,
                           data.test = heart.test,
                           main = "Heart Disease")
-
 ```
 
-<br>
 
 ```{r, eval = FALSE, echo = TRUE}
-# List of cue costs
 
+# List of cue costs
 heart.cost <- list(thal = 102.9, 
-                   sex = 1, 
-                   ca = 100.9, ...)
+                 sex = 1, 
+                 ca = 100.9) 
+                # ...)
+
 ```
 
-<font size = 5>Include list of costs as cost.cues</font>
+<font size = 5>Pass costs to cost.cues argument</font>
 
 
 ```{r, echo = TRUE, eval = FALSE}
