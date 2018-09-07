@@ -535,16 +535,23 @@ plot(heart_FFT, "test")
 
 ---
 
-<br>
-## Why did the tree make those decisions? What happens if you adjust its exit structure?
+.pull-left6[
 
+<br><br><br>
+## Why did the tree make those decisions?
+<br><br>
+## What happens if you tweak the tree's decisions??
 
-```{r, out.width = "50%", fig.width = 7, fig.height = 6}
+]
+
+.pull-right4[
+<br><br><br>
+```{r, out.width = "200%", fig.width = 7, fig.height = 6}
 plot(heart_FFT, "test")
 # knitr::include_graphics("images/heart_fft_test.png")
 ```
 
-
+]
 
 ---
 
@@ -635,13 +642,26 @@ knitr::include_graphics("images/roc_tree_6.png")
 
 ]
 
+
 ---
 
-## Those tests are very time consuming. It makes no sense to do them for every patient.
+.pull-left6[
 
-```{r, fig.width = 6, fig.height = 6, out.width = "45%"}
-plot(heart_FFT, data = "test")
+<br><br><br>
+## Those tests are very time consuming / expensive.
+<br><br>
+## Can you account for the cost of tests?
+
+]
+
+.pull-right4[
+<br><br><br>
+```{r, out.width = "200%", fig.width = 7, fig.height = 6}
+plot(heart_FFT, "test")
+# knitr::include_graphics("images/heart_fft_test.png")
 ```
+
+]
 
 ---
 
@@ -737,17 +757,27 @@ plot(heart_cost_FFT, data = "test")
 ]
 
 
+
+
 ---
 
-<br>
-## Could you try creating a tree like this?
+.pull-left6[
 
+<br><br><br>
+## I have an idea for a tree
+<br><br>
 
-```{r, out.width = "40%"}
+## How would this one perform on our data?
+
+]
+
+.pull-right4[
+<br><br><br>
+```{r, out.width = "100%"}
 knitr::include_graphics("images/custom_heart_fft.png")
 ```
 
-<br>
+]
 
 
 ---
@@ -798,17 +828,28 @@ plot(heart_cost_FFT, data = "test")
 ]
 
 
+
 ---
 
+.pull-left6[
+
+
+
+<br>
+## FFTs are nice for 'beginners'
+
 <br><br>
-## How well can an FFT compete with more complex algorithms?
+## But how well can an FFT compete with more complex algorithms?
 
+]
 
---
-
-```{r, out.width = "60%"}
+.pull-right4[
+<br><br><br><br>
+```{r, out.width = "100%"}
 knitr::include_graphics("images/fish.jpg")
 ```
+
+]
 
 
 ---
