@@ -398,27 +398,27 @@ heart_FFT
 
 ```
 ## Heart Disease
-## FFT #1 predicts diagnosis using 3 cues: {thal, cp, ca}
+## FFT 1 (of 7) predicts diagnosis using 3 cues: {thal, cp, ca}
 ## 
-## [1] If thal != {rd,fd}, decide Healthy.
-## [2] If cp = {a}, decide Diseased.
+## [1] If thal = {rd,fd}, decide Diseased.
+## [2] If cp != {a}, decide Healthy.
 ## [3] If ca &lt;= 0, decide Healthy, otherwise, decide Diseased.
 ## 
 ##                    train   test
 ## cases       .n    150.00 153.00
-## hits        .hi    44.00  49.00
-## misses      .mi    22.00  24.00
-## false al    .fa     7.00   8.00
-## corr rej    .cr    77.00  72.00
-## speed       .mcu    1.56   1.63
-## frugality   .pci    0.89   0.88
-## cost        .cost   0.19   0.21
-## accuracy    .acc    0.81   0.79
-## balanced    .bacc   0.79   0.79
-## sensitivity .sens   0.67   0.67
-## specificity .spec   0.92   0.90
+## hits        .hi    54.00  64.00
+## misses      .mi    12.00   9.00
+## false al    .fa    18.00  19.00
+## corr rej    .cr    66.00  61.00
+## speed       .mcu    1.74   1.73
+## frugality   .pci    0.88   0.88
+## cost        .cost   0.20   0.18
+## accuracy    .acc    0.80   0.82
+## balanced    .bacc   0.80   0.82
+## sensitivity .sens   0.82   0.88
+## specificity .spec   0.79   0.76
 ## 
-## pars: algorithm = 'ifan', goal = 'cost', goal.chase = 'cost', sens.w = 0.5, max.levels = 4
+## pars: algorithm = 'ifan', goal = 'wacc', goal.chase = 'wacc', sens.w = 0.5, max.levels = 4
 ```
 
 ]
